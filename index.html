@@ -1,0 +1,1103 @@
+<title>House of Syion</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Chewy&family=Nunito:wght@500;700;800&family=Quicksand:wght@500;700&family=Sniglet:wght@800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>window.tailwind&&(window.tailwind.config={corePlugins:{preflight:false}});</script>
+<style>
+/* Layout concept: one centred glass column, sticky pill nav on top, scalloped lace edges on cards, Y2K window for the studio. */
+:root{
+  --f-head:'Dino Care','Cute Dino','Chewy','Baloo 2',system-ui,sans-serif;
+  --f-btn:'Catcut','Eazy Chat','Baloo 2','Nunito',system-ui,sans-serif;
+  --f-deco:'Sobiscuit','Buycat','Sniglet','Baloo 2',system-ui,sans-serif;
+  --f-data:'Quicksand','Nunito',system-ui,sans-serif;
+  --mid:#3B3486; --lav:#D6C5F0; --star:#FFF38B; --pink:#FFB8D0; --cyan:#A2E1FF;
+  --bg1:#FFF6FA; --bg2:#F1E8FF; --bg3:#DFF4FF;
+  --fg:#3B3486; --fg-soft:#6a5fb0;
+  --glass:rgba(255,255,255,.58); --glass-brd:rgba(162,225,255,.95);
+  --solid:#ffffff; --nav-bg:rgba(255,246,250,.9); --chip:rgba(255,255,255,.7); --input:rgba(255,255,255,.92);
+  --shadow:0 10px 30px rgba(59,52,134,.16);
+  --danger:#c2255c; --ok:#1f8f5f; --warn:#a86400;
+  --star-op:.22; --flower-op:.55; --on-star:#3B3486; --star-edge:#e3d24a;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg1:#241e66; --bg2:#3B3486; --bg3:#52409f;
+  --fg:#F6F0FF; --fg-soft:#d2c6f5;
+  --glass:rgba(214,197,240,.13); --glass-brd:rgba(162,225,255,.5);
+  --solid:#2e2878; --nav-bg:rgba(36,30,102,.9); --chip:rgba(214,197,240,.16); --input:rgba(24,18,76,.55);
+  --shadow:0 12px 34px rgba(8,4,44,.5);
+  --danger:#ff8fb1; --ok:#8ff0c3; --warn:#ffd27a;
+  --star-op:1; --flower-op:0; --star-edge:#c9b93a;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg1:#241e66; --bg2:#3B3486; --bg3:#52409f;
+  --fg:#F6F0FF; --fg-soft:#d2c6f5;
+  --glass:rgba(214,197,240,.13); --glass-brd:rgba(162,225,255,.5);
+  --solid:#2e2878; --nav-bg:rgba(36,30,102,.9); --chip:rgba(214,197,240,.16); --input:rgba(24,18,76,.55);
+  --shadow:0 12px 34px rgba(8,4,44,.5);
+  --danger:#ff8fb1; --ok:#8ff0c3; --warn:#ffd27a;
+  --star-op:1; --flower-op:0; --star-edge:#c9b93a;
+  color-scheme:dark}
+
+html,body{min-height:100%}
+body{margin:0;background-color:var(--bg2);background-image:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));background-attachment:fixed;color:var(--fg);font-family:var(--f-data);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg1)}
+#root{position:relative;z-index:1;max-width:1120px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--f-head);font-weight:400;margin:0;text-wrap:balance;line-height:1.15}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+*{box-sizing:border-box;min-width:0}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+
+/* background layers */
+.fx{position:fixed;inset:0;pointer-events:none;z-index:0}
+.flowers{opacity:var(--flower-op);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg transform='translate(40 44)'%3E%3Cg fill='%23FFB8D0'%3E%3Ccircle cx='10' cy='0' r='8'/%3E%3Ccircle cx='3' cy='9.5' r='8'/%3E%3Ccircle cx='-8' cy='6' r='8'/%3E%3Ccircle cx='-8' cy='-6' r='8'/%3E%3Ccircle cx='3' cy='-9.5' r='8'/%3E%3C/g%3E%3Ccircle r='5.5' fill='%23FFF38B'/%3E%3C/g%3E%3Cg transform='translate(128 118) scale(.7)'%3E%3Cg fill='%23D6C5F0'%3E%3Ccircle cx='10' cy='0' r='8'/%3E%3Ccircle cx='3' cy='9.5' r='8'/%3E%3Ccircle cx='-8' cy='6' r='8'/%3E%3Ccircle cx='-8' cy='-6' r='8'/%3E%3Ccircle cx='3' cy='-9.5' r='8'/%3E%3C/g%3E%3Ccircle r='5.5' fill='%23FFF38B'/%3E%3C/g%3E%3Cg transform='translate(140 30)' fill='%23A2E1FF'%3E%3Ccircle r='3'/%3E%3Ccircle cx='10' cy='8' r='2'/%3E%3C/g%3E%3C/svg%3E");background-size:180px 180px}
+.sky{opacity:var(--star-op);background:
+  radial-gradient(40% 30% at 12% 18%,rgba(255,184,208,.26),transparent),
+  radial-gradient(35% 30% at 88% 26%,rgba(162,225,255,.22),transparent),
+  radial-gradient(45% 35% at 60% 95%,rgba(214,197,240,.26),transparent)}
+.star{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);background:var(--c);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:tw var(--d) ease-in-out var(--dl) infinite}
+@keyframes tw{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.15)}}
+@media (prefers-reduced-motion:reduce){.star{animation:none;opacity:.7}}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:10px 14px;margin:10px 0 14px;background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:2px solid var(--glass-brd);border-radius:28px;box-shadow:var(--shadow)}
+.logo{font-family:var(--f-head);font-size:1.4rem;margin-right:auto;white-space:nowrap;text-shadow:2px 2px 0 var(--pink);cursor:pointer;background:none;border:0;padding:0;color:var(--fg)}
+.seg{display:inline-flex;border:2px solid var(--glass-brd);border-radius:999px;overflow:hidden;background:var(--chip)}
+.seg button{border:0;background:transparent;padding:4px 11px;font-family:var(--f-btn);cursor:pointer;color:var(--fg)}
+.seg button[aria-pressed="true"]{background:var(--star);color:var(--on-star)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
+.tab{flex:none;font-family:var(--f-btn);font-size:1rem;padding:7px 16px;border-radius:999px;border:2px solid var(--glass-brd);background:var(--chip);color:var(--fg);cursor:pointer;text-decoration:none}
+.tab[aria-current="page"]{background:var(--star);color:var(--on-star);border-color:var(--star-edge)}
+
+/* surfaces */
+.glass{background:var(--glass);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border:2px solid var(--glass-brd);border-radius:26px;box-shadow:var(--shadow)}
+.pad{padding:18px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sp{margin-left:auto}
+.muted{color:var(--fg-soft)}
+.deco{font-family:var(--f-deco)}
+.sec-title{font-size:1.5rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sec-title small{font-family:var(--f-deco);font-size:.95rem;color:var(--fg-soft)}
+
+/* buttons */
+.btn{font-family:var(--f-btn);font-size:1rem;line-height:1.2;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:transform .12s ease,box-shadow .12s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(2px)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn-star{background:var(--star);color:var(--on-star);box-shadow:0 4px 0 var(--star-edge),0 8px 18px rgba(255,243,139,.3)}
+.btn-pink{background:var(--pink);color:#3B3486;box-shadow:0 4px 0 #f08fb3}
+.btn-ghost{background:var(--chip);color:var(--fg);border:2px solid var(--glass-brd)}
+.btn-danger{background:transparent;color:var(--danger);border:2px solid var(--danger)}
+.btn-sm{padding:5px 12px;font-size:.9rem}
+.btn-ico{padding:5px 9px;font-size:.95rem;border-radius:12px}
+.pill{display:inline-block;font-family:var(--f-btn);font-size:.8rem;padding:2px 10px;border-radius:999px;background:var(--pink);color:#3B3486}
+.pill-cyan{background:var(--cyan)}
+.pill-star{background:var(--star)}
+.st{font-family:var(--f-btn);font-size:.82rem;padding:2px 10px;border-radius:999px;border:2px solid currentColor;white-space:nowrap}
+.st-paid{color:var(--ok)}.st-dp{color:var(--warn)}.st-unpaid{color:var(--danger)}
+
+/* storefront header */
+.hero{overflow:hidden}
+.banner{position:relative;height:170px;background:linear-gradient(120deg,var(--lav),var(--pink) 45%,var(--cyan));background-size:cover;background-position:center}
+.banner::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:14px;background:radial-gradient(circle at 14px 14px,var(--star) 13px,transparent 14px) 0 0/28px 14px repeat-x;transform:scaleY(-1)}
+.avatar-wrap{position:relative;width:112px;height:112px;margin:-58px auto 0}
+.avatar{width:112px;height:112px;border-radius:50%;border:5px solid var(--star);box-shadow:0 0 0 4px var(--pink),0 0 30px 6px rgba(255,184,208,.7);background:linear-gradient(135deg,var(--lav),var(--pink));background-size:cover;background-position:center;display:grid;place-items:center;font-size:3rem}
+.edit-fab{position:absolute;right:10px;top:10px;z-index:2}
+.avatar-wrap .edit-fab{right:-6px;top:auto;bottom:0}
+.hero h1{font-size:clamp(1.9rem,6vw,2.8rem);text-align:center;margin-top:10px;text-shadow:3px 3px 0 var(--pink)}
+.hero .bio{text-align:center;max-width:520px;margin:6px auto 0;color:var(--fg-soft)}
+.hero .cta{display:flex;justify-content:center;padding:16px 0 22px}
+.btn-wa{font-size:1.1rem;padding:13px 26px;background:var(--star);color:var(--on-star);box-shadow:0 5px 0 var(--star-edge),0 0 26px rgba(255,243,139,.55);border:2px solid var(--glass-brd)}
+
+/* catalog */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.chip{flex:none;scroll-snap-align:start;font-family:var(--f-btn);padding:8px 16px;border-radius:999px;border:2px solid var(--glass-brd);background:var(--chip);color:var(--fg);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--pink);color:#3B3486;border-color:#f08fb3}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.pcard{position:relative;padding:26px 16px 16px;display:flex;flex-direction:column;gap:10px;border-radius:24px}
+.pcard::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:radial-gradient(circle at 12px 12px,var(--pink) 11px,transparent 12px) 0 0/24px 12px repeat-x}
+.pbadge{flex:none;width:52px;height:52px;border-radius:18px;display:grid;place-items:center;font-family:var(--f-head);font-size:1.3rem;color:#3B3486;border:2px solid #fff}
+.pname{font-family:var(--f-head);font-size:1.25rem;overflow-wrap:anywhere}
+.durs{display:flex;flex-wrap:wrap;gap:6px}
+.dur{font-family:var(--f-btn);font-size:.85rem;padding:3px 11px;border-radius:999px;border:2px solid var(--glass-brd);background:var(--chip);cursor:pointer;color:var(--fg)}
+.dur[aria-pressed="true"]{background:var(--cyan);color:#3B3486;border-color:#6fc7ee}
+
+/* testimonials */
+.carousel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 16px;scrollbar-width:thin}
+.polaroid{position:relative;flex:none;width:200px;scroll-snap-align:center;background:var(--solid);padding:8px 8px 14px;border-radius:14px;box-shadow:var(--shadow);border:2px solid var(--glass-brd);transform:rotate(-2deg);cursor:zoom-in}
+.polaroid:nth-child(even){transform:rotate(2.2deg)}
+.polaroid img{display:block;width:100%;height:240px;object-fit:cover;border-radius:8px}
+.polaroid .x{position:absolute;right:-6px;top:-8px}
+.ghost-frame{flex:none;width:170px;height:200px;border:3px dashed var(--glass-brd);border-radius:18px;display:grid;place-items:center;text-align:center;padding:12px;color:var(--fg-soft);font-family:var(--f-deco)}
+
+/* forms */
+.field{display:flex;flex-direction:column;gap:4px;font-size:.88rem}
+.field>span{font-family:var(--f-btn);color:var(--fg-soft);font-size:.9rem}
+.field.full{grid-column:1/-1}
+input[type=text],input[type=password],input[type=email],input[type=number],input[type=tel],input[type=date],input[type=search],select,textarea{width:100%;background:var(--input);border:2px solid var(--glass-brd);border-radius:14px;padding:9px 12px;color:var(--fg);font-family:var(--f-data);font-size:1rem;font-weight:600}
+textarea{resize:vertical;min-height:140px;line-height:1.45}
+input[type=range]{width:100%;accent-color:#ff8fb8}
+input[type=color]{width:100%;height:40px;border:2px solid var(--glass-brd);border-radius:12px;background:var(--input);padding:2px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.pw{display:flex;gap:6px}
+.sw{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--f-btn)}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw-t{width:48px;height:28px;border-radius:999px;background:var(--chip);border:2px solid var(--glass-brd);position:relative;transition:background .15s;flex:none}
+.sw-t::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--fg-soft);transition:transform .15s,background .15s}
+.sw input:checked+.sw-t{background:var(--pink)}
+.sw input:checked+.sw-t::after{transform:translateX(20px);background:#fff}
+.sw input:focus-visible+.sw-t{outline:3px solid var(--pink);outline-offset:2px}
+.radios{display:flex;gap:8px;flex-wrap:wrap}
+.radios button{font-family:var(--f-btn);padding:7px 14px;border-radius:999px;border:2px solid var(--glass-brd);background:var(--chip);cursor:pointer;color:var(--fg)}
+.radios button[aria-pressed="true"]{background:var(--star);color:var(--on-star);border-color:var(--star-edge)}
+
+/* modal + toast */
+.mback{position:fixed;inset:0;z-index:60;background:rgba(24,12,70,.55);backdrop-filter:blur(4px);display:flex;align-items:flex-start;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));overflow-y:auto}
+.modal{width:100%;max-width:640px;margin:auto;background:var(--solid);color:var(--fg);border:2px solid var(--glass-brd);border-radius:26px;box-shadow:var(--shadow)}
+.modal.wide{max-width:900px}
+.modal-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-bottom:2px dashed var(--glass-brd)}
+.modal-h h3{font-size:1.35rem}
+.modal-b{padding:18px}
+.toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:90;background:var(--star);color:var(--on-star);font-family:var(--f-btn);padding:10px 20px;border-radius:999px;box-shadow:0 6px 0 var(--star-edge),var(--shadow);animation:pop .25s ease-out;max-width:calc(100vw - 32px)}
+@keyframes pop{from{transform:translate(-50%,14px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.pre{white-space:pre-wrap;font-family:var(--f-data);font-weight:600;overflow-wrap:anywhere}
+
+/* orders */
+.bar{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-btn);font-size:.95rem}
+.bar b{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto;border-radius:18px;border:2px solid var(--glass-brd);background:var(--glass)}
+table{border-collapse:collapse;width:100%;font-family:var(--f-data);font-size:.9rem}
+th{font-family:var(--f-btn);font-weight:400;text-align:left;padding:9px 10px;background:var(--chip);white-space:nowrap;position:sticky;top:0}
+td{padding:8px 10px;border-top:1px dashed var(--glass-brd);vertical-align:middle;font-weight:600}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+td.nw{white-space:nowrap}
+.acts{display:flex;gap:5px;flex-wrap:nowrap}
+.warnbox{border:2px dashed var(--warn);border-radius:18px;padding:10px 14px;color:var(--fg)}
+
+/* studio */
+.win{border:3px solid var(--fg);border-radius:16px;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:7px 7px 0 var(--pink);overflow:hidden}
+.win-bar{display:flex;align-items:center;gap:8px;padding:6px 10px;background:linear-gradient(90deg,var(--pink),var(--lav),var(--cyan));color:#3B3486;font-family:var(--f-btn);border-bottom:3px solid var(--fg)}
+.win-bar i{width:16px;height:16px;border:2px solid #3B3486;background:#fff;display:inline-block;border-radius:4px}
+.win-menu{display:flex;flex-wrap:wrap;gap:8px;padding:10px 12px;border-bottom:2px dashed var(--glass-brd);align-items:center}
+.win-body{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:0}
+.stage{position:relative;padding:14px;min-height:320px}
+.ctl{padding:14px;border-left:2px dashed var(--glass-brd);display:flex;flex-direction:column;gap:12px}
+.canvas-box{background:repeating-conic-gradient(rgba(214,197,240,.35) 0 25%,transparent 0 50%) 0 0/20px 20px;border-radius:14px;border:2px solid var(--glass-brd);overflow:hidden;display:flex;justify-content:center}
+.canvas-box canvas{display:block;max-width:100%;max-height:60vh;height:auto;width:auto;touch-action:none;cursor:crosshair}
+.drop{border:3px dashed var(--glass-brd);border-radius:22px;padding:34px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.drop.on{background:var(--chip);border-color:var(--pink)}
+.thumbs{display:flex;gap:14px;overflow-x:auto;padding:16px 8px 8px}
+.thumb{flex:none;width:86px;border:3px solid var(--solid);background:var(--solid);border-radius:10px;padding:3px;cursor:pointer;box-shadow:var(--shadow);transform:rotate(-3.5deg);transition:transform .15s;position:relative}
+.thumb:nth-child(even){transform:rotate(3deg)}
+.thumb[aria-current="true"]{border-color:var(--star);transform:rotate(0) scale(1.1);z-index:2}
+.thumb canvas{display:block;width:100%;height:70px;object-fit:cover;border-radius:6px}
+.thumb .x{position:absolute;right:-8px;top:-9px}
+.folder{position:absolute;right:22px;top:22px;z-index:5;width:200px;background:var(--solid);border:3px solid var(--fg);border-radius:6px 16px 16px 16px;box-shadow:5px 5px 0 var(--cyan)}
+.folder-tab{position:absolute;left:-3px;top:-27px;background:var(--star);color:var(--on-star);border:3px solid var(--fg);border-bottom:0;border-radius:10px 10px 0 0;padding:2px 12px;font-family:var(--f-btn);font-size:.85rem;cursor:pointer}
+.folder-b{padding:10px;display:flex;flex-direction:column;gap:8px}
+.stk{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.stk button{border:2px solid var(--glass-brd);background:var(--chip);border-radius:12px;padding:2px;cursor:pointer;line-height:0}
+.stk canvas{width:100%;height:auto}
+@media (max-width:860px){
+  .win-body{grid-template-columns:minmax(0,1fr)}
+  .ctl{border-left:0;border-top:2px dashed var(--glass-brd)}
+  .folder{position:static;width:auto;margin:34px 14px 0}
+}
+
+/* templates */
+.memo{position:relative;padding:22px 16px 14px;display:flex;flex-direction:column;gap:8px;border-radius:20px;min-height:200px}
+.memo::before{content:"";position:absolute;left:50%;top:-10px;width:70px;height:22px;transform:translateX(-50%) rotate(-3deg);background:rgba(255,184,208,.75);border-radius:4px}
+.memo .pre{max-height:220px;overflow:auto;font-size:.95rem;background:var(--chip);border-radius:14px;padding:10px 12px}
+.quick{display:flex;flex-wrap:wrap;gap:6px}
+.quick button{border:2px solid var(--glass-brd);background:var(--chip);border-radius:12px;padding:3px 9px;cursor:pointer;font-family:var(--f-data);font-weight:700;color:var(--fg)}
+</style>
+<script>
+/* ---- Deployment config (leave blank to run in local demo mode) ---- */
+window.SYION_CONFIG={
+  SUPABASE_URL:'',        // https://xxxx.supabase.co
+  SUPABASE_ANON_KEY:'',   // anon public key
+  ADMIN_EMAIL:'',         // the Supabase Auth user whose password is your admin PIN
+  SHEETS_WEBHOOK:''       // optional Google Apps Script web-app URL for one-click Sheets export
+};
+</script>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script>
+/* ================= core helpers ================= */
+const CFG=Object.assign({SUPABASE_URL:'',SUPABASE_ANON_KEY:'',ADMIN_EMAIL:'',SHEETS_WEBHOOK:''},window.SYION_CONFIG||{});
+const CLOUD=!!(CFG.SUPABASE_URL&&CFG.SUPABASE_ANON_KEY);
+const {createElement:h,useState,useEffect,useRef,useMemo,useContext,createContext,Fragment}=React;
+const $=new Proxy({},{get:(_,t)=>(p,...c)=>(p&&p.constructor===Object&&!p.$$typeof)?h(t,p,...c):h(t,null,p,...c)});
+const AppCtx=createContext(null);
+const useApp=()=>useContext(AppCtx);
+const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);
+const LS={
+  get(k,d){try{const v=localStorage.getItem('syion:'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('syion:'+k,JSON.stringify(v));return true}catch(e){return false}}
+};
+
+/* dates & durations */
+const pad=n=>String(n).padStart(2,'0');
+const isoDate=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const today=()=>isoDate(new Date());
+const parseISO=s=>{const a=String(s).split('-').map(Number);return new Date(a[0],a[1]-1,a[2])};
+const addDays=(d,n)=>{const r=new Date(d);r.setDate(r.getDate()+n);return r};
+const addMonths=(d,n)=>{const r=new Date(d.getFullYear(),d.getMonth()+n,1);const last=new Date(r.getFullYear(),r.getMonth()+1,0).getDate();r.setDate(Math.min(d.getDate(),last));return r};
+const diffDays=(a,b)=>Math.round((b-a)/864e5);
+const DUR_OPTS=['1d','2d','3d','4d','5d','1w','2w','1m','2m','3m','4m','5m','6m','1y','custom'];
+const UNIT={d:['hari','day'],w:['minggu','week'],m:['bulan','month'],y:['tahun','year']};
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const parseDur=o=>{
+  if(o.dur==='custom')return{n:Math.max(1,+o.durN||1),u:o.durU||'d'};
+  const m=/^(\d+)([dwmy])$/.exec(o.dur||'1m');
+  return m?{n:+m[1],u:m[2]}:{n:1,u:'m'};
+};
+const unitLabel=(u,n,lang)=>lang==='id'?UNIT[u][0]:UNIT[u][1]+(n>1?'s':'');
+const durLabel=(o,lang)=>{const d=parseDur(o);return d.n+' '+cap(unitLabel(d.u,d.n,lang))};
+const prodDur=(s,lang)=>/^\d+[dwmy]$/i.test(s)?durLabel({dur:s.toLowerCase()},lang):s;
+const calcExpiry=(dateISO,o)=>{
+  const d=parseDur(o),base=parseISO(dateISO);let e;
+  if(d.u==='d')e=addDays(base,d.n);else if(d.u==='w')e=addDays(base,7*d.n);
+  else if(d.u==='m')e=addMonths(base,d.n);else e=addMonths(base,12*d.n);
+  return{expires:isoDate(e),days:diffDays(base,e)};
+};
+const loc=lang=>lang==='id'?'id-ID':'en-GB';
+const fmtDate=(s,lang)=>s?parseISO(s).toLocaleDateString(loc(lang),{day:'numeric',month:'short',year:'numeric'}):'-';
+const monthLabel=(ym,lang)=>{const a=ym.split('-').map(Number);return new Date(a[0],a[1]-1,1).toLocaleDateString(loc(lang),{month:'long',year:'numeric'})};
+const rp=n=>'Rp '+(Number(n)||0).toLocaleString('id-ID');
+const waDigits=s=>{let d=String(s||'').replace(/\D/g,'');if(d.startsWith('0'))d='62'+d.slice(1);return d};
+const waUrl=(num,text)=>'https://wa.me/'+waDigits(num)+(text?'?text='+encodeURIComponent(text):'');
+
+/* clipboard / images */
+async function copyText(s){
+  try{await navigator.clipboard.writeText(s);return true}catch(e){
+    try{const ta=document.createElement('textarea');ta.value=s;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();return ok}catch(e2){return false}
+  }
+}
+const loadImg=src=>new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src});
+const fileURL=f=>URL.createObjectURL(f);
+async function shrink(src,max,q){
+  const i=await loadImg(src),s=Math.min(1,max/Math.max(i.naturalWidth,i.naturalHeight));
+  const c=document.createElement('canvas');c.width=Math.round(i.naturalWidth*s);c.height=Math.round(i.naturalHeight*s);
+  c.getContext('2d').drawImage(i,0,0,c.width,c.height);return c.toDataURL('image/jpeg',q);
+}
+const ensureFonts=()=>Promise.all(['700 40px "Baloo 2"','40px Chewy','700 40px Quicksand','40px Sniglet'].map(f=>document.fonts.load(f))).catch(()=>{});
+
+/* toast */
+const toastBus=new EventTarget();
+const toast=m=>toastBus.dispatchEvent(new CustomEvent('t',{detail:m}));
+
+/* ================= data layer: Supabase REST or localStorage ================= */
+let authToken=null;
+async function rest(path,opt){
+  opt=opt||{};
+  const r=await fetch(CFG.SUPABASE_URL+'/rest/v1/'+path,Object.assign({},opt,{headers:Object.assign({apikey:CFG.SUPABASE_ANON_KEY,Authorization:'Bearer '+(authToken||CFG.SUPABASE_ANON_KEY),'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},opt.headers||{})}));
+  if(!r.ok)throw new Error(await r.text());
+  const t=await r.text();return t?JSON.parse(t):null;
+}
+const DB={
+  async list(col){
+    if(!CLOUD)return LS.get(col,[]);
+    const rows=await rest(col+'?select=id,data&order=created_at.asc');
+    return(rows||[]).map(r=>Object.assign({},r.data,{id:r.id}));
+  },
+  async put(col,item){
+    if(!CLOUD){const l=LS.get(col,[]),i=l.findIndex(x=>x.id===item.id);if(i>=0)l[i]=item;else l.push(item);if(!LS.set(col,l))throw new Error('quota');return}
+    const row={id:item.id,data:item};
+    if(col==='orders'){row.order_date=item.date;row.expires_at=item.expires||null;row.duration_days=item.durDays||0}
+    await rest(col,{method:'POST',body:JSON.stringify(row)});
+  },
+  async del(col,id){
+    if(!CLOUD){LS.set(col,LS.get(col,[]).filter(x=>x.id!==id));return}
+    await rest(col+'?id=eq.'+encodeURIComponent(id),{method:'DELETE'});
+  },
+  async getKV(){
+    if(!CLOUD)return LS.get('kv',{});
+    const rows=await rest('kv?select=key,value'),o={};(rows||[]).forEach(r=>{o[r.key]=r.value});return o;
+  },
+  async setKV(key,value){
+    if(!CLOUD){const o=LS.get('kv',{});o[key]=value;if(!LS.set('kv',o))throw new Error('quota');return}
+    await rest('kv',{method:'POST',body:JSON.stringify({key,value})});
+  }
+};
+async function sha(s){
+  try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('syion|'+s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+  catch(e){return'p:'+s}
+}
+const DEFAULT_PIN='2026';
+async function adminLogin(pin){
+  if(CLOUD){
+    try{
+      const r=await fetch(CFG.SUPABASE_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:CFG.SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify({email:CFG.ADMIN_EMAIL,password:pin})});
+      if(!r.ok)return false;authToken=(await r.json()).access_token;return true;
+    }catch(e){return false}
+  }
+  const stored=LS.get('pinhash',null)||await sha(DEFAULT_PIN);
+  return(await sha(pin))===stored;
+}
+async function changePin(pin){
+  if(CLOUD){
+    const r=await fetch(CFG.SUPABASE_URL+'/auth/v1/user',{method:'PUT',headers:{apikey:CFG.SUPABASE_ANON_KEY,Authorization:'Bearer '+authToken,'Content-Type':'application/json'},body:JSON.stringify({password:pin})});
+    return r.ok;
+  }
+  return LS.set('pinhash',await sha(pin));
+}
+
+/* ================= catalog seed ================= */
+const CATS=[['Entertainment','Entertainment'],['AI','AI & Productivity'],['Design','Design'],['Custom','Custom']];
+const SEED={
+  Entertainment:['HBO MAX','Crunchyroll','DRAMABOX','DRAMAWAVE','VIKI+','YOUKU','AppMus','VISION+ sports','BSTATION','IQIYI','Amazon Prime','Vidio Platinum','VIU','Disney+','Youtube','NETFLIX','WETV','LOKLOK'],
+  AI:['CHATGPT','GEMINI PRO','SUPER GROK AI','ZOOM','CLAUDE AI','QUILLBOT','GRAMMARLY','DEEPL PRO','MS365'],
+  Design:['DAZZCAM','Beautyplus','MEITU','ALIGHT MOTION','Canva Pro','CAPCUT Pro']
+};
+const BASE_PRODUCTS=Object.keys(SEED).flatMap(c=>SEED[c].map(n=>({id:'b-'+n,name:n,cat:c,durs:['1m','1y']})));
+const BADGE_COLORS=['#FFB8D0','#A2E1FF','#FFF38B','#D6C5F0'];
+const badgeColor=s=>BADGE_COLORS[(s.charCodeAt(0)+s.length)%4];
+const initials=s=>s.replace(/[^A-Za-z0-9 +]/g,'').split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'✦';
+const DEFAULT_PROFILE={name:'HOUSE OF SYION 🎀',bio:'',wa:'',greeting:'',banner:null,avatar:null};
+/* ================= shared UI ================= */
+function Stars(){
+  const stars=useMemo(()=>{
+    let s=7;const r=()=>{s=(s*9301+49297)%233280;return s/233280};
+    const cols=['#FFF38B','#FFFFFF','#FFB8D0','#A2E1FF'];
+    return Array.from({length:64},(_,i)=>({x:(r()*100).toFixed(1)+'%',y:(r()*100).toFixed(1)+'%',s:(5+r()*11).toFixed(0)+'px',c:cols[i%4],d:(2.2+r()*3.5).toFixed(1)+'s',dl:(r()*4).toFixed(1)+'s'}));
+  },[]);
+  return h(Fragment,null,
+    $.div({className:'fx flowers','aria-hidden':'true'}),
+    $.div({className:'fx sky','aria-hidden':'true'},stars.map((s,i)=>$.i({key:i,className:'star',style:{'--x':s.x,'--y':s.y,'--s':s.s,'--c':s.c,'--d':s.d,'--dl':s.dl}}))));
+}
+function Sparkles(){
+  const ref=useRef();
+  useEffect(()=>{
+    const cv=ref.current,x=cv.getContext('2d');let ps=[],raf,w=0,hh=0;
+    const rs=()=>{const d=Math.min(window.devicePixelRatio||1,2);w=innerWidth;hh=innerHeight;cv.width=w*d;cv.height=hh*d;x.setTransform(d,0,0,d,0,0)};
+    rs();addEventListener('resize',rs);
+    const cols=['#FFF38B','#FFB8D0','#A2E1FF','#ffffff'];
+    const add=(px,py)=>{if(ps.length>140)return;for(let i=0;i<2;i++)ps.push({x:px,y:py,vx:(Math.random()-.5)*1.3,vy:Math.random()*1.2+.2,l:1,s:Math.random()*6+4,c:cols[Math.random()*4|0],r:Math.random()*6})};
+    const mv=e=>{const t=e.touches?e.touches[0]:e;if(t)add(t.clientX,t.clientY)};
+    addEventListener('pointermove',mv);addEventListener('touchmove',mv,{passive:true});
+    const loop=()=>{
+      x.clearRect(0,0,w,hh);ps=ps.filter(p=>p.l>0);
+      for(const p of ps){
+        p.x+=p.vx;p.y+=p.vy;p.l-=.028;p.r+=.1;x.globalAlpha=Math.max(p.l,0);x.fillStyle=p.c;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.beginPath();
+        for(let i=0;i<8;i++){const q=i%2?p.s*.28:p.s,a=i*Math.PI/4;x.lineTo(Math.cos(a)*q,Math.sin(a)*q)}
+        x.closePath();x.fill();x.restore();
+      }
+      x.globalAlpha=1;raf=requestAnimationFrame(loop);
+    };
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)loop();
+    return()=>{cancelAnimationFrame(raf);removeEventListener('resize',rs);removeEventListener('pointermove',mv);removeEventListener('touchmove',mv)};
+  },[]);
+  return $.canvas({ref,className:'fx',style:{zIndex:100,width:'100%',height:'100%'},'aria-hidden':'true'});
+}
+function ToastHost(){
+  const [m,setM]=useState(null);
+  useEffect(()=>{
+    let tm;const f=e=>{setM({t:e.detail,k:Date.now()});clearTimeout(tm);tm=setTimeout(()=>setM(null),2300)};
+    toastBus.addEventListener('t',f);return()=>{toastBus.removeEventListener('t',f);clearTimeout(tm)};
+  },[]);
+  return m?$.div({className:'toast',role:'status',key:m.k},'✨ '+m.t):null;
+}
+function Modal({title,onClose,wide,children}){
+  useEffect(()=>{const f=e=>{if(e.key==='Escape')onClose()};addEventListener('keydown',f);return()=>removeEventListener('keydown',f)},[]);
+  return $.div({className:'mback',onMouseDown:e=>{if(e.target===e.currentTarget)onClose()}},
+    $.div({className:'modal'+(wide?' wide':''),role:'dialog','aria-modal':'true','aria-label':title},
+      $.div({className:'modal-h'},$.h3(title),$.button({className:'btn btn-ghost btn-sm',onClick:onClose,'aria-label':'Close'},'✕')),
+      $.div({className:'modal-b'},children)));
+}
+const Switch=({on,set,label,id})=>$.label({className:'sw'},$.input({type:'checkbox',id,checked:!!on,onChange:e=>set(e.target.checked)}),$.span({className:'sw-t'}),label?$.span(label):null);
+const Field=({label,children,full,plain})=>h(plain?'div':'label',{className:'field'+(full?' full':'')},$.span(label),children);
+
+/* shows plain text that could not be copied automatically */
+function TextModal({text,onClose}){
+  const {L}=useApp();const ref=useRef();
+  useEffect(()=>{ref.current&&ref.current.select()},[]);
+  return h(Modal,{title:L('Salin manual','Copy manually'),onClose},
+    $.p({className:'muted',style:{marginBottom:8}},L('Browser menolak akses clipboard. Teks sudah terpilih, tekan Ctrl/Cmd+C.','Your browser blocked clipboard access. The text is selected, press Ctrl/Cmd+C.')),
+    $.textarea({ref,readOnly:true,value:text,style:{minHeight:220},id:'manual-copy'}));
+}
+/* shows rendered images (receipt, watermark results) */
+function ImageModal({results,onClose,title}){
+  const A=useApp(),L=A.L;
+  return h(Modal,{title:title||L('Hasil','Result'),onClose,wide:true},
+    $.p({className:'muted',style:{marginBottom:12}},L('Jika tombol Simpan tidak berjalan, tekan lama (HP) atau klik kanan (komputer) pada gambar lalu simpan.','If Save does nothing, long-press (phone) or right-click (desktop) the image and save it.')),
+    $.div({className:'stack'},results.map((r,i)=>$.div({key:i,className:'stack',style:{alignItems:'center'}},
+      $.img({src:r.url,alt:r.name,style:{maxHeight:'70vh',borderRadius:14,border:'2px solid var(--glass-brd)'}}),
+      $.div({className:'row'},
+        $.a({className:'btn btn-star',href:r.url,download:r.name},'⬇ '+L('Simpan','Save')),
+        r.testi?$.button({className:'btn btn-pink',onClick:async()=>{try{await A.addTesti(await shrink(r.url,900,.82));toast(L('Masuk ke testimoni','Added to testimonials'))}catch(e){toast(L('Gagal menambah','Could not add'))}}},'＋ '+L('Testimoni','Testimonial')):null)))));
+}
+
+/* ================= nav ================= */
+function Nav(){
+  const A=useApp(),L=A.L;
+  return $.header({className:'nav'},
+    $.button({className:'logo',onClick:()=>A.go('shop'),'aria-label':'House of Syion'},'HOUSE OF SYION 🎀'),
+    $.div({className:'seg',role:'group','aria-label':'Language'},
+      ['id','en'].map(l=>$.button({key:l,'aria-pressed':A.lang===l,onClick:()=>A.setLang(l)},l.toUpperCase()))),
+    $.div({className:'seg',role:'group','aria-label':'Theme'},
+      $.button({'aria-pressed':A.eff==='light',onClick:()=>A.setTheme('light')},'☀️ '+L('Siang','Day')),
+      $.button({'aria-pressed':A.eff==='dark',onClick:()=>A.setTheme('dark')},'🌙 '+L('Malam','Night'))),
+    A.admin
+      ?$.button({className:'btn btn-ghost btn-sm',onClick:A.logout},L('Keluar','Log out'))
+      :$.button({className:'btn btn-star btn-sm',onClick:()=>A.go('orders')},'🔒 Admin'));
+}
+function AdminTabs(){
+  const A=useApp(),L=A.L;
+  const tabs=[['shop','🏠 '+L('Toko','Shop')],['orders','🧾 '+L('Pesanan','Orders')],['studio','🖼 Watermark Studio'],['templates','📝 '+L('Template Promo','Promo Templates')],['setup','⚙️ '+L('Pengaturan','Settings')]];
+  return $.nav({className:'tabs','aria-label':'Admin'},tabs.map(([k,l])=>$.a({key:k,className:'tab',href:'#'+k,'aria-current':A.route===k?'page':undefined},l)));
+}
+
+/* ================= PIN gate ================= */
+function PinGate(){
+  const A=useApp(),L=A.L;
+  const [pin,setPin]=useState(''),[err,setErr]=useState(''),[busy,setBusy]=useState(false);
+  const fails=useRef({n:0,until:0});
+  const submit=async e=>{
+    e.preventDefault();const f=fails.current;
+    if(Date.now()<f.until){setErr(L('Terlalu banyak percobaan. Tunggu 30 detik ya.','Too many tries. Please wait 30 seconds.'));return}
+    setBusy(true);const ok=await A.login(pin);setBusy(false);
+    if(!ok){f.n++;if(f.n>=5){f.until=Date.now()+30000;f.n=0}setErr(L('PIN salah, coba lagi ya 🥺','Wrong PIN, try again 🥺'));setPin('')}
+  };
+  return $.form({className:'glass pad stack',style:{maxWidth:380,margin:'40px auto',textAlign:'center'},onSubmit:submit},
+    $.div({style:{fontSize:'2.6rem'}},'🔐'),
+    $.h2(L('Ruang Admin','Admin Room')),
+    $.p({className:'muted'},L('Masukkan PIN untuk membuka dashboard.','Enter your PIN to open the dashboard.')),
+    $.input({id:'pin',type:'password',inputMode:'numeric',autoComplete:'current-password','aria-label':'PIN',value:pin,onChange:e=>{setPin(e.target.value);setErr('')},style:{textAlign:'center',letterSpacing:'.4em',fontSize:'1.3rem'},autoFocus:true}),
+    err?$.p({role:'alert',style:{color:'var(--danger)',fontWeight:700}},err):null,
+    $.button({className:'btn btn-star',type:'submit',disabled:busy||!pin},busy?'…':L('Buka','Unlock')+' ✨'));
+}
+
+/* ================= storefront ================= */
+function ProductCard({p}){
+  const A=useApp(),L=A.L;
+  const [d,setD]=useState(0);
+  const dur=p.durs[d]!==undefined?prodDur(p.durs[d],A.lang):'';
+  const msg=L('Halo kak, aku mau order '+p.name+(dur?' ('+dur+')':'')+' 🎀','Hi! I would like to order '+p.name+(dur?' ('+dur+')':'')+' 🎀');
+  return $.article({className:'glass pcard'},
+    $.div({className:'row',style:{flexWrap:'nowrap'}},
+      $.div({className:'pbadge',style:{background:badgeColor(p.name)},'aria-hidden':'true'},initials(p.name)),
+      $.div({style:{minWidth:0}},$.div({className:'pname'},p.name),$.span({className:'pill pill-cyan'},(CATS.find(c=>c[0]===p.cat)||[0,p.cat])[1]))),
+    $.div({className:'durs',role:'group','aria-label':L('Durasi','Duration')},p.durs.map((x,i)=>$.button({key:i,className:'dur','aria-pressed':d===i,onClick:()=>setD(i)},prodDur(x,A.lang)))),
+    $.a({className:'btn btn-star',href:waUrl(A.profile.wa,msg),target:'_blank',rel:'noopener',style:{marginTop:'auto'}},L('Pesan Sekarang','Order Now')+' 🛒'));
+}
+function Testimonials(){
+  const A=useApp(),L=A.L;
+  const [view,setView]=useState(null);
+  return $.section({className:'stack'},
+    $.h2({className:'sec-title'},L('Testimoni','Happy Reviews'),$.small('✧ '+L('sudah diberi watermark','watermark protected'))),
+    A.testi.length
+      ?$.div({className:'carousel',tabIndex:0,'aria-label':L('Testimoni pelanggan','Customer reviews')},A.testi.map(t=>$.div({key:t.id,className:'polaroid',onClick:()=>setView([{url:t.src,name:'testimoni.jpg'}])},
+          $.img({src:t.src,alt:L('Testimoni pelanggan','Customer review'),loading:'lazy'}),
+          A.admin?$.button({className:'btn btn-danger btn-ico x',style:{background:'var(--solid)'},'aria-label':'Delete',onClick:e=>{e.stopPropagation();A.delTesti(t.id)}},'✕'):null)))
+      :$.div({className:'carousel'},[0,1,2].map(i=>$.div({key:i,className:'ghost-frame'},i===0?(A.admin?L('Buat gambar di Watermark Studio lalu tekan “＋ Testimoni”','Make an image in Watermark Studio, then press “＋ Testimonial”'):L('Testimoni pertama segera hadir ✨','The first reviews are coming soon ✨')):'✧'))),
+    view?h(ImageModal,{results:view,onClose:()=>setView(null),title:L('Testimoni','Review')}):null);
+}
+function Storefront(){
+  const A=useApp(),L=A.L,P=A.profile;
+  const [cat,setCat]=useState('all');
+  const bannerIn=useRef(),avatarIn=useRef();
+  const list=A.products.filter(p=>cat==='all'||p.cat===cat);
+  const pick=(kind)=>async e=>{
+    const f=e.target.files[0];e.target.value='';if(!f)return;
+    try{const src=await shrink(fileURL(f),kind==='banner'?1200:400,.82);A.setProfile({...P,[kind]:src})}catch(x){toast(L('Gambar gagal dibaca','Could not read the image'))}
+  };
+  const greet=P.greeting||L('Halo kak, aku mau tanya-tanya produk di HOUSE OF SYION 🎀','Hi! I would like to ask about the products at HOUSE OF SYION 🎀');
+  return $.div({className:'stack',style:{gap:26}},
+    $.section({className:'glass hero'},
+      $.div({className:'banner',style:P.banner?{backgroundImage:'url('+P.banner+')'}:null},
+        A.admin?$.button({className:'btn btn-ghost btn-sm edit-fab',onClick:()=>bannerIn.current.click()},'✎ '+L('Banner','Banner')):null),
+      $.div({className:'avatar-wrap'},
+        $.div({className:'avatar',style:P.avatar?{backgroundImage:'url('+P.avatar+')'}:null,role:'img','aria-label':'Profile'},P.avatar?null:'🎀'),
+        A.admin?$.button({className:'btn btn-pink btn-sm btn-ico edit-fab','aria-label':'Edit avatar',onClick:()=>avatarIn.current.click()},'✎'):null),
+      $.input({ref:bannerIn,type:'file',accept:'image/*',hidden:true,id:'banner-file',onChange:pick('banner')}),
+      $.input({ref:avatarIn,type:'file',accept:'image/*',hidden:true,id:'avatar-file',onChange:pick('avatar')}),
+      $.h1(P.name||'HOUSE OF SYION 🎀'),
+      $.p({className:'bio deco',style:{fontSize:'1.05rem'}},P.bio||L('Aplikasi premium & akun digital, proses cepat dan ramah ✧ chat admin ya kak!','Premium apps & digital accounts, quick and friendly ✧ message the admin!')),
+      $.div({className:'cta'},$.a({className:'btn btn-wa',href:waUrl(P.wa,greet),target:'_blank',rel:'noopener'},'💬 '+L('Chat via WhatsApp','Chat on WhatsApp'))),
+      A.admin&&!P.wa?$.p({className:'muted',style:{textAlign:'center',padding:'0 16px 16px'}},L('Isi nomor WhatsApp di Pengaturan supaya tombol langsung ke chat kamu.','Add your WhatsApp number in Settings so buttons open your chat.')):null),
+    $.section({className:'stack'},
+      $.h2({className:'sec-title'},L('Katalog','Catalog'),$.small('✧ '+list.length+' '+L('aplikasi','apps'))),
+      $.div({className:'chips',role:'group','aria-label':L('Kategori','Category')},
+        [['all',L('Semua','All')]].concat(CATS.map(c=>[c[0],c[1]])).map(c=>$.button({key:c[0],className:'chip','aria-pressed':cat===c[0],onClick:()=>setCat(c[0])},c[1]))),
+      list.length?$.div({className:'grid'},list.map(p=>h(ProductCard,{key:p.id,p})))
+        :$.div({className:'glass pad muted',style:{textAlign:'center'}},L('Belum ada produk di kategori ini.','Nothing in this category yet.'))),
+    h(Testimonials),
+    $.footer({className:'deco muted',style:{textAlign:'center',padding:'6px 0 0'}},'૮ ˶ᵔ ᵕ ᵔ˶ ა  HOUSE OF SYION 🎀'));
+}
+/* ================= orders ================= */
+const KAO=['૮ ˶ᵔ ᵕ ᵔ˶ ა','₍ᐢ. .ᐢ₎','(๑>ᴗ<๑)','⸜(｡˃ ᵕ ˂ )⸝♡','(˶ᵔ ᵕ ᵔ˶)','ฅ^•ﻌ•^ฅ','˚₊‧꒰ა ☆ ໒꒱ ‧₊˚','⋆｡°✩','✧･ﾟ: *✧･ﾟ:*','♡','ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧','₊˚⊹'];
+const TAGS=['#zonauang','#houseofsyion','#readystock','#promo','#appspremium'];
+
+function plainText(o,lang){
+  const L=(a,b)=>lang==='id'?a:b;
+  return [
+    '૮ ˶ᵔ ᵕ ᵔ˶ ა  ✧ HOUSE OF SYION 🎀 ✧',
+    '╭────────────⋆⋅☆⋅⋆────────────╮',
+    ' ✧ '+L('Aplikasi','App')+' : '+o.app,
+    ' ✧ '+L('Tipe','Type')+' : '+(o.type==='Private'?'Private':'Sharing'),
+    ' ✧ '+L('Durasi','Duration')+' : '+durLabel(o,lang),
+    ' ✧ Email : '+(o.email||'-'),
+    ' ✧ Password : '+(o.password||'-'),
+    ' ✧ '+L('Aktif sampai','Active until')+' : '+fmtDate(o.expires,lang),
+    '╰────────────⋆⋅☆⋅⋆────────────╯',
+    ' ₍ᐢ. .ᐢ₎ ♡ '+L('Terima kasih ya kak, selamat menikmati!','Thank you, enjoy your app!')
+  ].join('\n');
+}
+
+async function makeReceipt(o,lang){
+  await ensureFonts();
+  const L=(a,b)=>lang==='id'?a:b,W=760,rows=[
+    [L('Tanggal','Date'),fmtDate(o.date,lang)],[L('Pembeli','Buyer'),o.buyer||'-'],[L('Aplikasi','App'),o.app],
+    [L('Tipe','Type'),o.type==='Private'?'Private':'Sharing'],[L('Durasi','Duration'),durLabel(o,lang)],
+    [L('Aktif sampai','Active until'),fmtDate(o.expires,lang)],[L('Perpanjangan','Renewal'),o.renewal?L('Ya','Yes'):L('Tidak','No')],
+    [L('Harga','Price'),rp(o.price)],[L('Pembayaran','Payment'),o.status==='Paid'?L('Lunas','Paid'):o.status==='DP'?'DP':L('Belum bayar','Unpaid')]];
+  const H=420+rows.length*58;
+  const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,'#2a2470');g.addColorStop(.55,'#3B3486');g.addColorStop(1,'#7a63d0');x.fillStyle=g;x.fillRect(0,0,W,H);
+  let s=11;const r=()=>{s=(s*9301+49297)%233280;return s/233280};
+  const cols=['#FFF38B','#ffffff','#FFB8D0','#A2E1FF'];
+  for(let i=0;i<70;i++){x.fillStyle=cols[i%4];x.globalAlpha=.35+r()*.6;const px=r()*W,py=r()*H,q=2+r()*5;x.beginPath();for(let k=0;k<8;k++){const a=k*Math.PI/4,rr=k%2?q*.3:q;x.lineTo(px+Math.cos(a)*rr,py+Math.sin(a)*rr)}x.closePath();x.fill()}
+  x.globalAlpha=1;
+  const px=40,py=70,pw=W-80,ph=H-140;
+  x.fillStyle='rgba(255,255,255,.93)';x.strokeStyle='#A2E1FF';x.lineWidth=5;
+  x.beginPath();x.roundRect?x.roundRect(px,py,pw,ph,34):x.rect(px,py,pw,ph);x.fill();x.stroke();
+  x.fillStyle='#FFB8D0';
+  for(let k=0;k<Math.floor(pw/30);k++){x.beginPath();x.arc(px+15+k*30,py,14,0,Math.PI);x.fill();x.beginPath();x.arc(px+15+k*30,py+ph,14,Math.PI,0);x.fill()}
+  x.textAlign='center';x.textBaseline='alphabetic';
+  x.fillStyle='#3B3486';x.font='44px Chewy,"Baloo 2",sans-serif';x.fillText('HOUSE OF SYION 🎀',W/2,py+84);
+  x.font='700 22px "Baloo 2",sans-serif';x.fillStyle='#8a7fd0';x.fillText('✧ DIGITAL RECEIPT ✧',W/2,py+120);
+  x.strokeStyle='#D6C5F0';x.setLineDash([8,8]);x.lineWidth=3;x.beginPath();x.moveTo(px+30,py+146);x.lineTo(px+pw-30,py+146);x.stroke();x.setLineDash([]);
+  let y=py+196;
+  rows.forEach(([k,v],i)=>{
+    x.textAlign='left';x.fillStyle='#7d72c4';x.font='700 22px Quicksand,"Baloo 2",sans-serif';x.fillText(k,px+36,y);
+    x.textAlign='right';x.fillStyle='#3B3486';x.font='700 26px Quicksand,"Baloo 2",sans-serif';
+    let t=String(v);while(x.measureText(t).width>pw-260&&t.length>4)t=t.slice(0,-2);if(t!==String(v))t+='…';
+    x.fillText(t,px+pw-36,y);y+=58;
+  });
+  x.textAlign='center';x.fillStyle='#3B3486';x.font='38px "Baloo 2",sans-serif';x.fillText('૮ ˶ᵔ ᵕ ᵔ˶ ა',W/2,y+30);
+  x.font='700 22px Quicksand,"Baloo 2",sans-serif';x.fillStyle='#8a7fd0';x.fillText(L('Terima kasih sudah belanja ya kak!','Thank you for shopping with us!'),W/2,y+68);
+  x.font='700 16px Quicksand,sans-serif';x.fillText('No. '+o.id.slice(0,8).toUpperCase(),W/2,H-86);
+  const blob=await new Promise(res=>c.toBlob(res,'image/png'));
+  return{name:'receipt-'+(o.buyer||'syion').replace(/\W+/g,'-')+'-'+o.date+'.png',url:URL.createObjectURL(blob)};
+}
+
+const blankOrder=()=>({id:uid(),date:today(),app:'NETFLIX',appCustom:'',type:'Sharing',dur:'1m',durN:1,durU:'d',renewal:false,buyer:'',wa:'',device:'',price:'',modal:'',email:'',password:'',fh:'',fhWa:'',status:'Unpaid',hasProof:false,proof:null});
+
+function OrderForm({init,onClose}){
+  const A=useApp(),L=A.L;
+  const [f,setF]=useState(init);const [pw,setPw]=useState(false);const [busy,setBusy]=useState(false);
+  const set=(k,v)=>setF(p=>({...p,[k]:v}));
+  const isCustom=f.app==='__custom';
+  const profit=(Number(f.price)||0)-(Number(f.modal)||0);
+  const names=A.products.map(p=>p.name);
+  const save=async e=>{
+    e.preventDefault();
+    const app=isCustom?(f.appCustom||'').trim():f.app;
+    if(!app){toast(L('Isi nama aplikasi dulu','Enter an app name'));return}
+    const ex=calcExpiry(f.date,f);
+    const o={...f,app,price:Number(f.price)||0,modal:Number(f.modal)||0,profit,expires:ex.expires,durDays:ex.days,proof:f.hasProof?f.proof:null};
+    delete o.appCustom;
+    setBusy(true);const ok=await A.saveOrder(o);setBusy(false);if(ok)onClose();
+  };
+  const pickProof=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{set('proof',await shrink(fileURL(file),900,.78))}catch(x){toast(L('Gambar gagal dibaca','Could not read the image'))}};
+  return h(Modal,{title:init.createdAt?L('Ubah Pesanan','Edit Order'):L('Pesanan Baru','New Order'),onClose,wide:true},
+    $.form({className:'stack',onSubmit:save},
+      $.div({className:'form-grid'},
+        h(Field,{label:L('Tanggal','Date')},$.input({id:'o-date',type:'date',required:true,value:f.date,onChange:e=>set('date',e.target.value)})),
+        h(Field,{label:L('Nama Aplikasi','App Name')},$.select({id:'o-app',value:f.app,onChange:e=>set('app',e.target.value)},names.map(n=>$.option({key:n,value:n},n)),$.option({value:'__custom'},L('Lainnya (ketik sendiri)','Custom (type it)')))),
+        isCustom?h(Field,{label:L('Nama Aplikasi Custom','Custom App Name')},$.input({id:'o-app-c',type:'text',value:f.appCustom,onChange:e=>set('appCustom',e.target.value)})):null,
+        h(Field,{label:L('Tipe','Type')},$.div({className:'radios'},['Sharing','Private'].map(t=>$.button({key:t,type:'button','aria-pressed':f.type===t,onClick:()=>set('type',t)},t)))),
+        h(Field,{label:L('Durasi','Duration')},$.select({id:'o-dur',value:f.dur,onChange:e=>set('dur',e.target.value)},DUR_OPTS.map(d=>$.option({key:d,value:d},d==='custom'?L('Custom','Custom'):durLabel({dur:d},A.lang))))),
+        f.dur==='custom'?h(Field,{label:L('Durasi Custom','Custom Duration')},$.div({className:'row',style:{flexWrap:'nowrap'}},
+          $.input({id:'o-durn',type:'number',min:1,value:f.durN,onChange:e=>set('durN',e.target.value)}),
+          $.select({id:'o-duru',value:f.durU,onChange:e=>set('durU',e.target.value)},Object.keys(UNIT).map(u=>$.option({key:u,value:u},cap(UNIT[u][A.lang==='id'?0:1])))))):null,
+        h(Field,{plain:true,label:L('Perpanjangan (Renewal)','Renewal')},h(Switch,{id:'o-renew',on:f.renewal,set:v=>set('renewal',v),label:f.renewal?L('Ya','Yes'):L('Tidak','No')})),
+        h(Field,{label:L('Inisial Pembeli','Buyer Initial')},$.input({id:'o-buyer',type:'text',value:f.buyer,onChange:e=>set('buyer',e.target.value)})),
+        h(Field,{label:L('No. WhatsApp Pembeli','Buyer WhatsApp')},$.input({id:'o-wa',type:'tel',placeholder:'08xxxxxxxxxx',value:f.wa,onChange:e=>set('wa',e.target.value)})),
+        h(Field,{label:L('Device / Brand','Device / Brand')},$.input({id:'o-dev',type:'text',value:f.device,onChange:e=>set('device',e.target.value)})),
+        h(Field,{label:L('Harga Aplikasi','App Price')},$.input({id:'o-price',type:'number',min:0,value:f.price,onChange:e=>set('price',e.target.value)})),
+        h(Field,{label:L('Modal','Capital')},$.input({id:'o-modal',type:'number',min:0,value:f.modal,onChange:e=>set('modal',e.target.value)})),
+        h(Field,{label:L('Profit (otomatis)','Profit (auto)')},$.div({className:'pill pill-star',style:{fontSize:'1.1rem',padding:'8px 14px',color:'#3B3486'}},rp(profit))),
+        h(Field,{label:'Email'},$.input({id:'o-email',type:'text',autoComplete:'off',value:f.email,onChange:e=>set('email',e.target.value)})),
+        h(Field,{label:'Password'},$.div({className:'pw'},$.input({id:'o-pass',type:pw?'text':'password',autoComplete:'new-password',value:f.password,onChange:e=>set('password',e.target.value)}),$.button({type:'button',className:'btn btn-ghost btn-ico','aria-label':pw?'Hide password':'Show password','aria-pressed':pw,onClick:()=>setPw(!pw)},pw?'🙈':'👁'))),
+        h(Field,{label:'Admin FH'},$.input({id:'o-fh',type:'text',value:f.fh,onChange:e=>set('fh',e.target.value)})),
+        h(Field,{label:L('Kontak Admin FH (WhatsApp)','Admin FH Contact (WhatsApp)')},$.input({id:'o-fhwa',type:'tel',placeholder:'08xxxxxxxxxx',value:f.fhWa,onChange:e=>set('fhWa',e.target.value)})),
+        h(Field,{label:L('Status Pembayaran','Payment Status')},$.div({className:'radios'},[['Unpaid',L('Belum bayar','Unpaid')],['DP','DP'],['Paid',L('Lunas','Paid')]].map(s=>$.button({key:s[0],type:'button','aria-pressed':f.status===s[0],onClick:()=>set('status',s[0])},s[1])))),
+        h(Field,{plain:true,label:L('Bukti Transfer','Transfer Proof'),full:true},$.div({className:'row'},
+          h(Switch,{id:'o-proof',on:f.hasProof,set:v=>set('hasProof',v),label:f.hasProof?L('Unggah bukti','Upload proof'):L('Tanpa bukti','No proof')}),
+          f.hasProof?$.input({id:'o-proof-f',type:'file',accept:'image/*',onChange:pickProof,style:{maxWidth:260}}):null,
+          f.hasProof&&f.proof?$.img({src:f.proof,alt:'Proof',style:{height:56,borderRadius:10,border:'2px solid var(--glass-brd)'}}):null))),
+      $.div({className:'row',style:{justifyContent:'flex-end'}},
+        $.button({type:'button',className:'btn btn-ghost',onClick:onClose},L('Batal','Cancel')),
+        $.button({type:'submit',className:'btn btn-star',disabled:busy},'💾 '+L('Simpan','Save')))));
+}
+
+function Orders(){
+  const A=useApp(),L=A.L;
+  const months=useMemo(()=>{const m={};A.orders.forEach(o=>{const k=(o.date||'').slice(0,7);if(k)m[k]=(m[k]||0)+1});return Object.keys(m).sort().reverse().map(k=>[k,m[k]])},[A.orders]);
+  const [month,setMonth]=useState(null);const [q,setQ]=useState('');
+  const [edit,setEdit]=useState(null),[shown,setShown]=useState({}),[del,setDel]=useState(null),[img,setImg]=useState(null),[manual,setManual]=useState(null),[proof,setProof]=useState(null);
+  const cur=month&&months.some(m=>m[0]===month)?month:month==='all'?'all':(months[0]?months[0][0]:'all');
+  const rows=useMemo(()=>{
+    const s=q.trim().toLowerCase();
+    return A.orders.filter(o=>(cur==='all'||(o.date||'').startsWith(cur))&&(!s||[o.app,o.buyer,o.wa,o.email,o.fh,o.fhWa,o.device,o.type,o.status].join(' ').toLowerCase().includes(s))).sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.createdAt||0)-(a.createdAt||0));
+  },[A.orders,cur,q]);
+  const sum=rows.reduce((a,o)=>({price:a.price+(o.price||0),modal:a.modal+(o.modal||0),profit:a.profit+(o.profit||0)}),{price:0,modal:0,profit:0});
+  const soon=A.orders.filter(o=>{if(!o.expires||(o.durDays||0)<=31)return false;const d=diffDays(parseISO(today()),parseISO(o.expires));return d>=0&&d<=3}).sort((a,b)=>a.expires.localeCompare(b.expires));
+  const stLabel=s=>s==='Paid'?L('Lunas','Paid'):s==='DP'?'DP':L('Belum','Unpaid');
+  const copy=async o=>{const t=plainText(o,A.lang);if(await copyText(t))toast(L('Teks tersalin ૮ ˶ᵔ ᵕ ᵔ˶ ა','Text copied ૮ ˶ᵔ ᵕ ᵔ˶ ა'));else setManual(t)};
+  const receipt=async o=>{try{setImg([await makeReceipt(o,A.lang)])}catch(e){toast(L('Gagal membuat struk','Could not create the receipt'))}};
+  const exportSheets=async()=>{
+    const head=['Date','App','Type','Duration','Renewal','Buyer','WhatsApp','Device','Price','Capital','Profit','Email','Password','Admin FH','Admin FH Contact','Payment','Active until'];
+    const data=rows.map(o=>[o.date,o.app,o.type,durLabel(o,'en'),o.renewal?'Yes':'No',o.buyer,o.wa,o.device,o.price,o.modal,o.profit,o.email,o.password,o.fh,o.fhWa,o.status,o.expires]);
+    if(CFG.SHEETS_WEBHOOK){
+      try{await fetch(CFG.SHEETS_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({sheet:cur,rows:[head].concat(data)})});toast(L('Dikirim ke Google Sheets','Sent to Google Sheets'));return}catch(e){}
+    }
+    const tsv=[head].concat(data).map(r=>r.map(c=>String(c==null?'':c).replace(/[\t\r\n]+/g,' ')).join('\t')).join('\n');
+    if(await copyText(tsv))toast(L('Data tersalin. Tempel di Google Sheets (Ctrl/Cmd+V)','Copied. Paste into Google Sheets (Ctrl/Cmd+V)'));else setManual(tsv);
+  };
+  return $.div({className:'stack'},
+    $.div({className:'row'},
+      $.h2({className:'sec-title'},L('Rekap Pesanan','Order Recap')),
+      $.div({className:'row sp'},
+        $.a({className:'btn btn-ghost',href:'https://sheets.new',target:'_blank',rel:'noopener',onClick:exportSheets},'📊 '+L('Ekspor ke Google Sheets','Export to Google Sheets')),
+        $.button({className:'btn btn-star',onClick:()=>setEdit(blankOrder())},'＋ '+L('Pesanan Baru','New Order')))),
+    soon.length?$.div({className:'warnbox',role:'status'},$.b('⏰ '+L('Segera berakhir (≤ 3 hari): ','Expiring soon (≤ 3 days): ')),soon.map(o=>o.app+' · '+(o.buyer||'-')+' · '+fmtDate(o.expires,A.lang)).join('   |   ')):null,
+    $.div({className:'chips',role:'group','aria-label':L('Bulan','Month')},
+      months.map(m=>$.button({key:m[0],className:'chip','aria-pressed':cur===m[0],onClick:()=>setMonth(m[0])},monthLabel(m[0],A.lang)+' · '+m[1])).concat([$.button({key:'all',className:'chip','aria-pressed':cur==='all',onClick:()=>setMonth('all')},L('Semua bulan','All months'))])),
+    $.div({className:'row'},
+      $.input({id:'o-search',type:'search',placeholder:'🔍 '+L('Cari pembeli, aplikasi, email…','Search buyer, app, email…'),value:q,onChange:e=>setQ(e.target.value),style:{maxWidth:360},'aria-label':L('Cari','Search')}),
+      $.div({className:'bar sp'},$.span(rows.length+' '+L('pesanan','orders')),$.span(L('Omzet','Revenue')+' ',$.b(rp(sum.price))),$.span(L('Modal','Capital')+' ',$.b(rp(sum.modal))),$.span('Profit ',$.b(rp(sum.profit))))),
+    rows.length?$.div({className:'tw'},$.table(
+      $.thead($.tr(['Date','App',L('Tipe','Type'),L('Durasi','Duration'),'Renewal',L('Pembeli','Buyer'),'WhatsApp','Device',L('Harga','Price'),L('Modal','Capital'),'Profit','Email','Password','Admin FH','FH WA',L('Status','Status'),L('Bukti','Proof'),L('Aksi','Actions')].map((c,i)=>$.th({key:i},c)))),
+      $.tbody(rows.map(o=>$.tr({key:o.id},
+        $.td({className:'nw'},fmtDate(o.date,A.lang)),
+        $.td({className:'nw'},$.b(o.app)),
+        $.td($.span({className:'pill pill-cyan'},o.type)),
+        $.td({className:'nw'},durLabel(o,A.lang),$.div({className:'muted',style:{fontSize:'.78rem'}},'→ '+fmtDate(o.expires,A.lang))),
+        $.td(o.renewal?'🔁':'—'),
+        $.td(o.buyer||'-'),
+        $.td({className:'nw'},o.wa?$.a({href:waUrl(o.wa),target:'_blank',rel:'noopener',style:{textDecoration:'underline'}},o.wa):'-'),
+        $.td(o.device||'-'),
+        $.td({className:'num'},rp(o.price)),$.td({className:'num'},rp(o.modal)),$.td({className:'num'},$.b(rp(o.profit))),
+        $.td(o.email||'-'),
+        $.td({className:'nw'},o.password?[shown[o.id]?o.password:'••••••',' ',$.button({key:'e',className:'btn btn-ghost btn-ico','aria-label':shown[o.id]?'Hide password':'Show password',onClick:()=>setShown(p=>({...p,[o.id]:!p[o.id]}))},shown[o.id]?'🙈':'👁')]:'-'),
+        $.td(o.fh||'-'),
+        $.td({className:'nw'},o.fhWa?$.a({href:waUrl(o.fhWa),target:'_blank',rel:'noopener',style:{textDecoration:'underline'}},o.fhWa):'-'),
+        $.td($.span({className:'st st-'+o.status.toLowerCase()},stLabel(o.status))),
+        $.td(o.proof?$.button({className:'btn btn-ghost btn-ico',onClick:()=>setProof([{url:o.proof,name:'proof.jpg'}]),'aria-label':'View proof'},'🧾'):'—'),
+        $.td($.div({className:'acts'},
+          $.button({className:'btn btn-ghost btn-ico',title:L('Salin teks cantik','Copy aesthetic text'),'aria-label':L('Salin teks cantik','Copy aesthetic text'),onClick:()=>copy(o)},'📋'),
+          $.button({className:'btn btn-ghost btn-ico',title:L('Buat struk','Receipt'),'aria-label':L('Buat struk','Receipt'),onClick:()=>receipt(o)},'🧾✨'),
+          $.button({className:'btn btn-ghost btn-ico',title:L('Ubah','Edit'),'aria-label':L('Ubah','Edit'),onClick:()=>setEdit({...o,hasProof:!!o.proof,appCustom:names(A).includes(o.app)?'':o.app,app:names(A).includes(o.app)?o.app:'__custom'})},'✎'),
+          del===o.id
+            ?$.button({className:'btn btn-danger btn-sm',onClick:()=>{A.delOrder(o.id);setDel(null)}},L('Yakin?','Sure?'))
+            :$.button({className:'btn btn-danger btn-ico','aria-label':L('Hapus','Delete'),onClick:()=>{setDel(o.id);setTimeout(()=>setDel(null),3000)}},'🗑'))))))))
+    :$.div({className:'glass pad muted',style:{textAlign:'center'}},A.orders.length?L('Tidak ada pesanan yang cocok.','No matching orders.'):L('Belum ada pesanan. Tekan “＋ Pesanan Baru” untuk mulai ✨','No orders yet. Press “＋ New Order” to start ✨')),
+    edit?h(OrderForm,{init:edit,onClose:()=>setEdit(null)}):null,
+    img?h(ImageModal,{results:img,onClose:()=>setImg(null),title:L('Struk Digital','Digital Receipt')}):null,
+    proof?h(ImageModal,{results:proof,onClose:()=>setProof(null),title:L('Bukti Transfer','Transfer Proof')}):null,
+    manual?h(TextModal,{text:manual,onClose:()=>setManual(null)}):null);
+}
+const names=A=>A.products.map(p=>p.name);
+/* ================= watermark studio ================= */
+const INK='#3B3486';
+const dot=(x,cx,cy,r)=>{x.beginPath();x.arc(cx,cy,r,0,7);x.fill()};
+const rr=(x,a,b,w,hh,q)=>{x.beginPath();x.moveTo(a+q,b);x.arcTo(a+w,b,a+w,b+hh,q);x.arcTo(a+w,b+hh,a,b+hh,q);x.arcTo(a,b+hh,a,b,q);x.arcTo(a,b,a+w,b,q);x.closePath()};
+const face=(x,r,dy)=>{
+  x.fillStyle=INK;dot(x,-.16*r,dy,.055*r);dot(x,.16*r,dy,.055*r);
+  x.fillStyle='rgba(255,140,175,.8)';dot(x,-.3*r,dy+.1*r,.07*r);dot(x,.3*r,dy+.1*r,.07*r);
+  x.strokeStyle=INK;x.lineWidth=r*.04;x.beginPath();x.arc(0,dy+.04*r,.07*r,.15*Math.PI,.85*Math.PI);x.stroke();
+};
+const SD={
+  cloud:(x,r)=>{const cs=[[-.5,.1,.3],[-.2,-.12,.4],[.22,-.02,.34],[.5,.14,.26],[-.15,.2,.3],[.2,.2,.3]];x.strokeStyle='#A2E1FF';x.lineWidth=r*.16;cs.forEach(c=>{x.beginPath();x.arc(c[0]*r,c[1]*r,c[2]*r,0,7);x.stroke()});x.fillStyle='#fff';cs.forEach(c=>dot(x,c[0]*r,c[1]*r,c[2]*r));face(x,r,.12*r)},
+  star:(x,r)=>{x.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?.45:1;x.lineTo(Math.cos(a)*r*.95*q,Math.sin(a)*r*.95*q)}x.closePath();x.fillStyle='#FFF38B';x.strokeStyle='#f2c94c';x.lineWidth=r*.1;x.stroke();x.fill();face(x,r,.05*r)},
+  heart:(x,r)=>{x.beginPath();x.moveTo(0,.8*r);x.bezierCurveTo(-1.1*r,.1*r,-.7*r,-.8*r,0,-.35*r);x.bezierCurveTo(.7*r,-.8*r,1.1*r,.1*r,0,.8*r);x.closePath();x.fillStyle='#FFB8D0';x.strokeStyle='#ff8fb8';x.lineWidth=r*.1;x.stroke();x.fill();face(x,r,-.02*r)},
+  bandaid:(x,r)=>{x.rotate(-.3);rr(x,-r,-.38*r,2*r,.76*r,.38*r);x.fillStyle='#FFD9C2';x.fill();x.strokeStyle='#f0b79a';x.lineWidth=r*.07;x.stroke();rr(x,-.4*r,-.38*r,.8*r,.76*r,.1*r);x.fillStyle='#FFE9DB';x.fill();x.stroke();x.fillStyle='#f0b79a';[[-.75,-.12],[-.75,.12],[-.6,0],[.75,-.12],[.75,.12],[.6,0]].forEach(p=>dot(x,p[0]*r,p[1]*r,.04*r))},
+  moon:(x,r)=>{x.save();x.beginPath();x.rect(-2*r,-2*r,4*r,4*r);x.arc(.38*r,-.12*r,.72*r,0,7,true);x.clip('evenodd');x.beginPath();x.arc(0,0,.9*r,0,7);x.fillStyle='#FFF38B';x.fill();x.lineWidth=r*.12;x.strokeStyle='#f2c94c';x.stroke();x.restore()},
+  flower:(x,r)=>{x.fillStyle='#FFB8D0';x.strokeStyle='#ff8fb8';x.lineWidth=r*.06;for(let i=0;i<5;i++){const a=i*2*Math.PI/5-Math.PI/2;x.beginPath();x.arc(Math.cos(a)*.5*r,Math.sin(a)*.5*r,.38*r,0,7);x.fill();x.stroke()}x.fillStyle='#FFF38B';dot(x,0,0,.32*r);face(x,.9*r,0)},
+  bow:(x,r)=>{x.fillStyle='#FFB8D0';x.strokeStyle='#ff8fb8';x.lineWidth=r*.08;[-1,1].forEach(s=>{x.beginPath();x.moveTo(0,0);x.bezierCurveTo(s*.5*r,-.7*r,s*1.05*r,-.55*r,s*.95*r,0);x.bezierCurveTo(s*1.05*r,.55*r,s*.5*r,.7*r,0,0);x.closePath();x.fill();x.stroke()});x.fillStyle='#ff9fc0';x.beginPath();x.arc(0,0,.2*r,0,7);x.fill();x.stroke()},
+  sparkle:(x,r)=>{x.beginPath();for(let i=0;i<8;i++){const a=-Math.PI/2+i*Math.PI/4,q=i%2?.22:1;x.lineTo(Math.cos(a)*r*q,Math.sin(a)*r*q)}x.closePath();x.fillStyle='#A2E1FF';x.strokeStyle='#ffffff';x.lineWidth=r*.1;x.stroke();x.fill()}
+};
+const STICKERS=Object.keys(SD);
+function drawSticker(x,s,W,H){const r=s.size*W/2;x.save();x.translate(s.x*W,s.y*H);x.rotate(s.rot*Math.PI/180);x.globalAlpha=1;x.lineJoin='round';x.lineCap='round';SD[s.kind](x,r);x.restore()}
+
+function wmMetrics(x,S,W){
+  if(S.mode==='png'&&S.png){const w=W*S.size/100*.8;return{w,h:w*S.png.naturalHeight/S.png.naturalWidth}}
+  const fp=Math.max(8,W*S.size/100*.22);x.font='700 '+fp+'px '+S.font+',"Baloo 2",sans-serif';
+  return{w:x.measureText(S.text||' ').width,h:fp*1.25,fp};
+}
+function wmDraw1(x,S,m){
+  if(S.mode==='png'&&S.png){x.drawImage(S.png,-m.w/2,-m.h/2,m.w,m.h);return}
+  x.font='700 '+m.fp+'px '+S.font+',"Baloo 2",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillStyle=S.color;x.fillText(S.text||'',0,0);
+}
+function drawWM(x,item,S,W,H){
+  if(S.mode==='png'&&!S.png)return;if(S.mode==='text'&&!S.text)return;
+  x.save();x.globalAlpha=S.opacity/100;const m=wmMetrics(x,S,W),rot=S.rot*Math.PI/180;
+  if(S.tile){
+    const gap=S.gap/1000*W,sx=m.w+gap,sy=m.h+gap,d=Math.hypot(W,H),nx=Math.min(60,Math.ceil(d/sx)+1),ny=Math.min(60,Math.ceil(d/sy)+1);
+    x.translate(W/2,H/2);x.rotate(rot);
+    for(let j=-ny;j<=ny;j++)for(let i=-nx;i<=nx;i++){x.save();x.translate(i*sx+(j&1?sx/2:0),j*sy);wmDraw1(x,S,m);x.restore()}
+  }else{x.translate(item.wmPos.x*W,item.wmPos.y*H);x.rotate(rot);wmDraw1(x,S,m)}
+  x.restore();
+}
+/* paints one image (cropped, watermarked, stickered). o.full shows the whole source with a crop overlay */
+function paint(cv,item,S,maxW,o){
+  o=o||{};const c=o.full?{x:0,y:0,w:1,h:1}:item.crop;
+  const sw=c.w*item.w,sh=c.h*item.h,sc=maxW?Math.min(1,maxW/sw):1,W=Math.max(1,Math.round(sw*sc)),H=Math.max(1,Math.round(sh*sc));
+  cv.width=W;cv.height=H;const x=cv.getContext('2d');
+  x.drawImage(item.img,c.x*item.w,c.y*item.h,sw,sh,0,0,W,H);
+  if(o.full){
+    const r=o.rect;if(!r)return;const a=r.x*W,b=r.y*H,w=r.w*W,hh=r.h*H;
+    x.fillStyle='rgba(30,20,80,.55)';x.fillRect(0,0,W,b);x.fillRect(0,b+hh,W,H-b-hh);x.fillRect(0,b,a,hh);x.fillRect(a+w,b,W-a-w,hh);
+    x.setLineDash([10,7]);x.lineWidth=Math.max(2,W/300);x.strokeStyle='#fff';x.strokeRect(a,b,w,hh);x.setLineDash([]);return;
+  }
+  drawWM(x,item,S,W,H);item.stickers.forEach(s=>drawSticker(x,s,W,H));
+  const sel=o.sel;if(!sel)return;
+  x.save();x.setLineDash([8,6]);x.lineWidth=Math.max(2,W/400);x.strokeStyle='#ffffff';x.shadowColor='rgba(59,52,134,.9)';x.shadowBlur=4;
+  if(sel.k==='s'){const s=item.stickers.find(t=>t.id===sel.id);if(s){const q=s.size*W;x.translate(s.x*W,s.y*H);x.rotate(s.rot*Math.PI/180);x.strokeRect(-q/2,-q/2,q,q)}}
+  else if(sel.k==='w'&&!S.tile&&(S.mode==='text'?S.text:S.png)){const m=wmMetrics(x,S,W);x.translate(item.wmPos.x*W,item.wmPos.y*H);x.rotate(S.rot*Math.PI/180);x.strokeRect(-m.w/2-6,-m.h/2-4,m.w+12,m.h+8)}
+  x.restore();
+}
+function StickerPreview({kind}){
+  const ref=useRef();
+  useEffect(()=>{const c=ref.current,x=c.getContext('2d');x.clearRect(0,0,64,64);x.translate(32,32);x.lineJoin='round';SD[kind](x,24)},[kind]);
+  return $.canvas({ref,width:64,height:64});
+}
+function Thumb({item,S,tick}){
+  const ref=useRef();
+  useEffect(()=>{paint(ref.current,item,S,160,{})},[item,S,tick]);
+  return $.canvas({ref});
+}
+
+function Studio(){
+  const A=useApp(),L=A.L;
+  const [items,setItems]=useState([]),[act,setAct]=useState(null),[sel,setSel]=useState(null),[crop,setCrop]=useState(false),[rect,setRect]=useState(null);
+  const [S,setS]=useState({mode:'text',text:'HOUSE OF SYION 🎀',color:'#ffffff',font:'Baloo 2',size:26,opacity:18,rot:-30,tile:true,gap:90,png:null,pngName:''});
+  const [tick,setTick]=useState(0),[res,setRes]=useState(null),[over,setOver]=useState(false),[folder,setFolder]=useState(true);
+  const cv=useRef(),box=useRef(),drag=useRef(null),fileIn=useRef(),pngIn=useRef();
+  const item=items.find(i=>i.id===act)||null;
+  const upd=(id,fn)=>setItems(p=>p.map(i=>i.id===id?fn(i):i));
+  const set=(k,v)=>setS(p=>({...p,[k]:v}));
+  useEffect(()=>{ensureFonts().then(()=>setTick(t=>t+1))},[]);
+  useEffect(()=>{
+    if(!item||!cv.current)return;
+    const mw=Math.min(1200,(box.current?box.current.clientWidth:700)*Math.min(window.devicePixelRatio||1,1.5));
+    if(crop)paint(cv.current,item,S,mw,{full:true,rect});else paint(cv.current,item,S,mw,{sel});
+  },[item,S,sel,crop,rect,tick]);
+
+  const addFiles=async fl=>{
+    const files=Array.from(fl).filter(f=>f.type.startsWith('image/'));if(!files.length)return;
+    const room=10-items.length;if(files.length>room)toast(L('Maksimal 10 gambar','Maximum 10 images'));
+    const nw=[];
+    for(const f of files.slice(0,Math.max(room,0))){
+      try{const img=await loadImg(fileURL(f));nw.push({id:uid(),name:f.name,img,w:img.naturalWidth,h:img.naturalHeight,crop:{x:0,y:0,w:1,h:1},stickers:[],wmPos:{x:.5,y:.5}})}catch(e){toast(L('Gambar gagal dibaca','Could not read an image'))}
+    }
+    if(nw.length){setItems(p=>p.concat(nw));if(!act)setAct(nw[0].id)}
+  };
+  const loadPng=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{const img=await loadImg(fileURL(f));setS(p=>({...p,mode:'png',png:img,pngName:f.name}))}catch(x){toast(L('PNG gagal dibaca','Could not read the PNG'))}};
+  const removeImg=id=>{setItems(p=>p.filter(i=>i.id!==id));if(act===id){const rest=items.filter(i=>i.id!==id);setAct(rest[0]?rest[0].id:null);setSel(null);setCrop(false)}};
+
+  const pos=e=>{const r=cv.current.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height}};
+  const hitWM=p=>{
+    if(S.tile||(S.mode==='png'?!S.png:!S.text))return false;
+    const x=cv.current.getContext('2d'),W=cv.current.width,H=cv.current.height,m=wmMetrics(x,S,W),a=-S.rot*Math.PI/180,dx=(p.x-item.wmPos.x)*W,dy=(p.y-item.wmPos.y)*H;
+    const lx=dx*Math.cos(a)-dy*Math.sin(a),ly=dx*Math.sin(a)+dy*Math.cos(a);
+    return Math.abs(lx)<m.w/2+10&&Math.abs(ly)<m.h/2+10;
+  };
+  const down=e=>{
+    if(!item)return;const p=pos(e);try{cv.current.setPointerCapture(e.pointerId)}catch(x){}
+    if(crop){drag.current={k:'crop',x0:p.x,y0:p.y};setRect({x:p.x,y:p.y,w:0,h:0});return}
+    const W=cv.current.width,H=cv.current.height;
+    for(let i=item.stickers.length-1;i>=0;i--){const s=item.stickers[i];if(Math.hypot((p.x-s.x)*W,(p.y-s.y)*H)<s.size*W/2*.9){setSel({k:'s',id:s.id});drag.current={k:'s',id:s.id,dx:p.x-s.x,dy:p.y-s.y};return}}
+    if(hitWM(p)){setSel({k:'w'});drag.current={k:'w',dx:p.x-item.wmPos.x,dy:p.y-item.wmPos.y};return}
+    setSel(null);
+  };
+  const move=e=>{
+    const d=drag.current;if(!d||!item)return;const p=pos(e),cl=v=>Math.min(1,Math.max(0,v));
+    if(d.k==='crop'){setRect({x:cl(Math.min(d.x0,p.x)),y:cl(Math.min(d.y0,p.y)),w:Math.min(Math.abs(p.x-d.x0),1),h:Math.min(Math.abs(p.y-d.y0),1)});return}
+    if(d.k==='s')upd(item.id,i=>({...i,stickers:i.stickers.map(s=>s.id===d.id?{...s,x:cl(p.x-d.dx),y:cl(p.y-d.dy)}:s)}));
+    if(d.k==='w')upd(item.id,i=>({...i,wmPos:{x:cl(p.x-d.dx),y:cl(p.y-d.dy)}}));
+  };
+  const up=()=>{drag.current=null};
+
+  const cropTo=n=>{
+    const o=item.crop,cv2=(px,py)=>({x:(o.x+px*o.w-n.x)/n.w,y:(o.y+py*o.h-n.y)/n.h});
+    upd(item.id,i=>({...i,crop:{x:n.x,y:n.y,w:n.w,h:n.h},stickers:i.stickers.map(s=>({...s,...cv2(s.x,s.y),size:s.size*o.w/n.w})),wmPos:cv2(i.wmPos.x,i.wmPos.y)}));
+  };
+  const toggleCrop=()=>{if(!item)return;if(!crop){setRect({...item.crop});setSel(null)}setCrop(!crop)};
+  const applyCrop=()=>{if(!rect||rect.w<.03||rect.h<.03){toast(L('Tarik area crop dulu ya','Drag a crop area first'));return}cropTo(rect);setCrop(false);setRect(null)};
+  const resetCrop=()=>{cropTo({x:0,y:0,w:1,h:1});setCrop(false);setRect(null)};
+
+  const addSticker=k=>{
+    if(!item){toast(L('Tambah gambar dulu ya','Add an image first'));return}
+    const s={id:uid(),kind:k,x:.5,y:.5,size:.18,rot:0};upd(item.id,i=>({...i,stickers:i.stickers.concat(s)}));setSel({k:'s',id:s.id});
+  };
+  const selSt=item&&sel&&sel.k==='s'?item.stickers.find(s=>s.id===sel.id):null;
+  const updSt=patch=>upd(item.id,i=>({...i,stickers:i.stickers.map(s=>s.id===sel.id?{...s,...patch}:s)}));
+  const delSt=()=>{upd(item.id,i=>({...i,stickers:i.stickers.filter(s=>s.id!==sel.id)}));setSel(null)};
+  const applyAll=()=>{
+    if(!item)return;
+    setItems(p=>p.map(i=>i.id===item.id?i:{...i,stickers:item.stickers.map(s=>({...s,id:uid()})),wmPos:{...item.wmPos}}));
+    toast(L('Watermark & stiker disalin ke semua gambar ✧','Watermark & stickers applied to all images ✧'));
+  };
+  const render=async it=>{
+    await ensureFonts();const c=document.createElement('canvas');paint(c,it,S,null,{});
+    const blob=await new Promise(r=>c.toBlob(r,'image/png'));
+    return{name:(it.name.replace(/\.\w+$/,'')||'image')+'-syion-hd.png',url:URL.createObjectURL(blob),testi:true};
+  };
+  const dlOne=async()=>{if(!item)return;try{setRes([await render(item)])}catch(e){toast(L('Gagal membuat gambar HD','Could not render the HD image'))}};
+  const dlAll=async()=>{try{const r=[];for(const it of items)r.push(await render(it));setRes(r)}catch(e){toast(L('Gagal membuat gambar HD','Could not render the HD images'))}};
+
+  const stage=item
+    ?$.div({ref:box,className:'canvas-box'},$.canvas({ref:cv,onPointerDown:down,onPointerMove:move,onPointerUp:up,onPointerCancel:up,'aria-label':L('Kanvas gambar','Image canvas')}))
+    :$.div({className:'drop'+(over?' on':'')},
+        $.div({style:{fontSize:'2.4rem'}},'🖼'),
+        $.h3(L('Seret gambar ke sini','Drag images here')),
+        $.p({className:'muted'},L('Sampai 10 screenshot chat. Kamu bisa tempel watermark dan stiker sensor.','Up to 10 chat screenshots. Add a watermark and censor stickers.')),
+        $.button({className:'btn btn-star',onClick:()=>fileIn.current.click()},'＋ '+L('Pilih gambar','Choose images')));
+
+  return $.div({className:'stack'},
+    $.h2({className:'sec-title'},'Watermark Studio',$.small('✧ '+L('lindungi testimoni & sensor data pelanggan','protect reviews & censor customer data'))),
+    $.div({className:'win',onDragOver:e=>{e.preventDefault();setOver(true)},onDragLeave:()=>setOver(false),onDrop:e=>{e.preventDefault();setOver(false);addFiles(e.dataTransfer.files)}},
+      $.div({className:'win-bar'},$.i(),$.i(),$.span({style:{flex:1,textAlign:'center'}},'syion-studio.exe'),$.i(),$.i()),
+      $.div({className:'win-menu'},
+        $.input({ref:fileIn,type:'file',accept:'image/*',multiple:true,hidden:true,id:'studio-files',onChange:e=>{addFiles(e.target.files);e.target.value=''}}),
+        $.button({className:'btn btn-ghost btn-sm',onClick:()=>fileIn.current.click(),disabled:items.length>=10},'＋ '+L('Gambar','Images')+' ('+items.length+'/10)'),
+        $.button({className:'btn btn-ghost btn-sm','aria-pressed':crop,onClick:toggleCrop,disabled:!item},'✂ '+(crop?L('Selesai crop','Exit crop'):'Crop')),
+        crop?$.button({className:'btn btn-pink btn-sm',onClick:applyCrop},L('Terapkan crop','Apply crop')):null,
+        crop||(item&&(item.crop.w<1||item.crop.h<1))?$.button({className:'btn btn-ghost btn-sm',onClick:resetCrop},L('Reset crop','Reset crop')):null,
+        $.button({className:'btn btn-pink btn-sm',onClick:applyAll,disabled:items.length<2},'✨ '+L('Terapkan ke Semua','Apply to All')),
+        $.span({className:'sp'}),
+        $.button({className:'btn btn-star',onClick:dlOne,disabled:!item,style:{borderRadius:999,padding:'9px 22px'}},'⬇ Download HD'),
+        items.length>1?$.button({className:'btn btn-ghost btn-sm',onClick:dlAll},L('Semua','All')+' ('+items.length+')'):null),
+      $.div({className:'win-body'},
+        $.div({className:'stage'},
+          item&&folder?null:null,
+          $.div({className:'folder'},
+            $.button({className:'folder-tab','aria-expanded':folder,onClick:()=>setFolder(!folder)},'📁 '+L('Stiker','Stickers')+(folder?' ▾':' ▸')),
+            folder?$.div({className:'folder-b'},
+              $.div({className:'stk'},STICKERS.map(k=>$.button({key:k,'aria-label':'Add '+k+' sticker',title:k,onClick:()=>addSticker(k)},h(StickerPreview,{kind:k})))),
+              selSt?$.div({className:'stack',style:{gap:8}},
+                h(Field,{label:L('Ukuran stiker','Sticker size')},$.input({id:'st-size',type:'range',min:4,max:70,value:Math.round(selSt.size*100),onChange:e=>updSt({size:e.target.value/100})})),
+                h(Field,{label:L('Putar stiker','Sticker rotation')},$.input({id:'st-rot',type:'range',min:-180,max:180,value:selSt.rot,onChange:e=>updSt({rot:+e.target.value})})),
+                $.button({className:'btn btn-danger btn-sm',onClick:delSt},'🗑 '+L('Hapus stiker','Delete sticker')))
+              :$.p({className:'muted',style:{fontSize:'.85rem'}},L('Tap stiker untuk menaruhnya, lalu seret di gambar.','Tap a sticker to place it, then drag it on the image.'))):null),
+          stage,
+          items.length?$.div({className:'thumbs'},items.map(it=>$.div({key:it.id,className:'thumb','aria-current':it.id===act,onClick:()=>{setAct(it.id);setSel(null);setCrop(false)},role:'button',tabIndex:0,onKeyDown:e=>{if(e.key==='Enter')setAct(it.id)},'aria-label':it.name},
+            h(Thumb,{item:it,S,tick}),
+            $.button({className:'btn btn-danger btn-ico x',style:{background:'var(--solid)',padding:'0 6px'},'aria-label':'Remove image',onClick:e=>{e.stopPropagation();removeImg(it.id)}},'✕')))):null,
+          crop?$.p({className:'muted',style:{marginTop:8}},L('Mode crop: tarik di gambar untuk memilih area, lalu “Terapkan crop”.','Crop mode: drag on the image to pick an area, then “Apply crop”.')):null),
+        $.div({className:'ctl'},
+          $.div({className:'radios'},[['text',L('Teks','Text')],['png','PNG']].map(m=>$.button({key:m[0],'aria-pressed':S.mode===m[0],onClick:()=>set('mode',m[0])},m[1]))),
+          S.mode==='text'
+            ?$.div({className:'stack',style:{gap:10}},
+                h(Field,{label:L('Teks watermark','Watermark text')},$.input({id:'wm-text',type:'text',value:S.text,onChange:e=>set('text',e.target.value)})),
+                $.div({className:'form-grid',style:{gridTemplateColumns:'1fr 1fr'}},
+                  h(Field,{label:L('Font','Font')},$.select({id:'wm-font',value:S.font,onChange:e=>set('font',e.target.value)},['Baloo 2','Chewy','Sniglet','Quicksand'].map(f=>$.option({key:f,value:f},f)))),
+                  h(Field,{label:L('Warna','Color')},$.input({id:'wm-color',type:'color',value:S.color,onChange:e=>set('color',e.target.value)}))))
+            :$.div({className:'stack',style:{gap:8}},
+                $.input({ref:pngIn,type:'file',accept:'image/png',hidden:true,id:'wm-png',onChange:loadPng}),
+                $.button({className:'btn btn-ghost btn-sm',onClick:()=>pngIn.current.click()},'⬆ '+L('Unggah PNG watermark','Upload watermark PNG')),
+                $.span({className:'muted'},S.pngName||L('Belum ada PNG','No PNG yet'))),
+          h(Field,{label:L('Ukuran / Zoom','Size / Zoom')+' · '+S.size+'%'},$.input({id:'wm-size',type:'range',min:6,max:100,value:S.size,onChange:e=>set('size',+e.target.value)})),
+          h(Field,{label:L('Transparansi','Opacity')+' · '+S.opacity+'%'},$.input({id:'wm-op',type:'range',min:5,max:100,value:S.opacity,onChange:e=>set('opacity',+e.target.value)})),
+          $.p({className:'muted',style:{fontSize:'.8rem',marginTop:-6}},L('Saran 15 sampai 20% supaya tetap terbaca.','15 to 20% keeps the picture readable.')),
+          h(Field,{label:L('Sudut rotasi (°)','Rotation angle (°)')},$.input({id:'wm-rot',type:'number',min:-180,max:180,step:1,value:S.rot,onChange:e=>set('rot',Math.max(-180,Math.min(180,+e.target.value||0)))})),
+          h(Field,{plain:true,label:'Tiling / Grid'},h(Switch,{id:'wm-tile',on:S.tile,set:v=>set('tile',v),label:S.tile?L('Ulang di seluruh gambar','Repeat across image'):L('Satu watermark (bisa digeser)','Single (drag to move)')})),
+          S.tile?h(Field,{label:L('Jarak antar watermark','Spacing')},$.input({id:'wm-gap',type:'range',min:0,max:300,value:S.gap,onChange:e=>set('gap',+e.target.value)})):null))),
+    res?h(ImageModal,{results:res,onClose:()=>setRes(null),title:'Download HD'}):null);
+}
+/* ================= promo templates ================= */
+const TPL_CATS=['cetgi-pity','kloude ei-ai','netts','kanpa','kepkat','cek gtc'];
+const TPL_SEED=[
+  ['cetgi-pity','Ready stock AI','₍ᐢ•ﻌ•ᐢ₎ ✧ READY STOCK ✧\n⋆｡°✩ akun AI Plus, sharing & private\n✧ dibantu sampai bisa dipakai\n✧ slot terbatas, chat admin ya kak\n\n૮ ˶ᵔ ᵕ ᵔ˶ ა\n#zonauang #houseofsyion'],
+  ['kloude ei-ai','Open order','(˶ᵔ ᵕ ᵔ˶) OPEN ORDER ♡\n✧ asisten AI buat nulis, riset & belajar\n✧ sharing / private tersedia\n✧ langsung chat admin untuk info durasi\n\n⋆｡°✩ #zonauang #appspremium'],
+  ['netts','Nonton hemat','⸜(｡˃ ᵕ ˂ )⸝♡ NONTON PUAS ♡\n✧ akun streaming sharing & private\n✧ durasi 1 bulan / 1 tahun\n✧ tanya stok ke admin sebelum order\n\n#zonauang #readystock'],
+  ['kanpa','Desain ready','✧･ﾟ: *✧･ﾟ:* DESAIN LANCAR ✧･ﾟ: *✧･ﾟ:*\n♡ Pro tools buat bikin konten\n♡ proses cepat, ramah pemula\n♡ chat admin untuk durasi yang tersedia\n\n#houseofsyion #promo'],
+  ['kepkat','Edit video','₊˚⊹ EDIT VIDEO ₊˚⊹\n✧ fitur Pro terbuka\n✧ cocok buat konten harian\n✧ order lewat WhatsApp admin ya\n\n(๑>ᴗ<๑) #zonauang'],
+  ['cek gtc','Cek stok','ฅ^•ﻌ•^ฅ CEK STOK DULU YA\n✧ stok bisa berubah kapan saja\n✧ tanya admin sebelum transfer\n\n#houseofsyion #readystock']
+];
+function TemplateForm({init,onClose}){
+  const A=useApp(),L=A.L;
+  const [f,setF]=useState(init);const ta=useRef();
+  const ins=txt=>{
+    const el=ta.current,s=el?el.selectionStart:f.body.length,e=el?el.selectionEnd:f.body.length;
+    const nb=f.body.slice(0,s)+txt+f.body.slice(e);setF(p=>({...p,body:nb}));
+    setTimeout(()=>{if(el){el.focus();el.selectionStart=el.selectionEnd=s+txt.length}},0);
+  };
+  const save=async e=>{e.preventDefault();if(!f.title.trim()&&!f.body.trim()){toast(L('Isi judul atau teks dulu','Add a title or some text'));return}if(await A.saveTpl({...f,title:f.title.trim()||L('Tanpa judul','Untitled')}))onClose()};
+  return h(Modal,{title:init.createdAt?L('Ubah Template','Edit Template'):L('Template Baru','New Template'),onClose,wide:true},
+    $.form({className:'stack',onSubmit:save},
+      $.div({className:'form-grid'},
+        h(Field,{label:L('Judul','Title')},$.input({id:'t-title',type:'text',value:f.title,onChange:e=>setF({...f,title:e.target.value})})),
+        h(Field,{label:L('Kategori','Category')},$.select({id:'t-cat',value:f.cat,onChange:e=>setF({...f,cat:e.target.value})},TPL_CATS.concat(['other']).map(c=>$.option({key:c,value:c},c))))),
+      $.div({className:'glass pad stack',style:{gap:8}},
+        $.span({className:'deco'},'✧ '+L('Sisipkan cepat','Quick insert')),
+        $.div({className:'quick'},KAO.map(k=>$.button({key:k,type:'button',onClick:()=>ins(k)},k))),
+        $.div({className:'quick'},TAGS.map(k=>$.button({key:k,type:'button',onClick:()=>ins(k+' ')},k)))),
+      h(Field,{label:L('Teks (polos, spasi & enter dipertahankan)','Text (plain, spacing & line breaks are kept)'),full:true},$.textarea({ref:ta,id:'t-body',spellCheck:false,value:f.body,onChange:e=>setF({...f,body:e.target.value}),style:{minHeight:240}})),
+      $.div({className:'row',style:{justifyContent:'flex-end'}},
+        $.button({type:'button',className:'btn btn-ghost',onClick:onClose},L('Batal','Cancel')),
+        $.button({type:'submit',className:'btn btn-star'},'💾 '+L('Simpan','Save')))));
+}
+function Templates(){
+  const A=useApp(),L=A.L;
+  const [cat,setCat]=useState('all'),[q,setQ]=useState(''),[edit,setEdit]=useState(null),[manual,setManual]=useState(null),[del,setDel]=useState(null);
+  const cats=['all'].concat(TPL_CATS,['other']);
+  const list=A.templates.filter(t=>(cat==='all'||t.cat===cat)&&(!q.trim()||(t.title+' '+t.body).toLowerCase().includes(q.trim().toLowerCase())));
+  const copy=async t=>{if(await copyText(t.body))toast(L('Tersalin! ૮ ˶ᵔ ᵕ ᵔ˶ ა','Copied! ૮ ˶ᵔ ᵕ ᵔ˶ ა'));else setManual(t.body)};
+  return $.div({className:'stack'},
+    $.div({className:'row'},
+      $.h2({className:'sec-title'},L('Template Promo','Promo Template Bank'),$.small('✧ '+A.templates.length)),
+      $.button({className:'btn btn-star sp',onClick:()=>setEdit({id:uid(),title:'',cat:cat==='all'?TPL_CATS[0]:cat,body:''})},'＋ '+L('Buat Template','Create Template'))),
+    $.div({className:'chips',role:'group','aria-label':L('Kategori','Category')},cats.map(c=>$.button({key:c,className:'chip','aria-pressed':cat===c,onClick:()=>setCat(c)},c==='all'?L('Semua','All'):c))),
+    $.input({id:'t-search',type:'search',placeholder:'🔍 '+L('Cari template…','Search templates…'),value:q,onChange:e=>setQ(e.target.value),style:{maxWidth:340},'aria-label':L('Cari','Search')}),
+    list.length?$.div({className:'grid',style:{gridTemplateColumns:'repeat(auto-fill,minmax(260px,1fr))',paddingTop:10}},list.map(t=>$.article({key:t.id,className:'glass memo'},
+      $.div({className:'row',style:{flexWrap:'nowrap'}},
+        $.div({style:{minWidth:0}},$.div({className:'pname',style:{fontSize:'1.1rem'}},t.title),$.span({className:'pill'},t.cat)),
+        $.button({className:'btn btn-star btn-ico sp','aria-label':L('Salin teks','Copy text'),title:L('Salin','Copy'),onClick:()=>copy(t),style:{flex:'none'}},'📋')),
+      $.pre({className:'pre',style:{margin:0}},t.body),
+      $.div({className:'row',style:{marginTop:'auto'}},
+        $.button({className:'btn btn-ghost btn-sm',onClick:()=>setEdit(t)},'✎ '+L('Ubah','Edit')),
+        del===t.id?$.button({className:'btn btn-danger btn-sm',onClick:()=>{A.delTpl(t.id);setDel(null)}},L('Yakin?','Sure?')):$.button({className:'btn btn-danger btn-sm',onClick:()=>{setDel(t.id);setTimeout(()=>setDel(null),3000)}},'🗑')))))
+      :$.div({className:'glass pad muted',style:{textAlign:'center'}},L('Belum ada template di sini.','No templates here yet.')),
+    edit?h(TemplateForm,{init:edit,onClose:()=>setEdit(null)}):null,
+    manual?h(TextModal,{text:manual,onClose:()=>setManual(null)}):null);
+}
+
+/* ================= settings ================= */
+function Settings(){
+  const A=useApp(),L=A.L,P=A.profile;
+  const [f,setF]=useState({name:P.name,bio:P.bio,wa:P.wa,greeting:P.greeting});
+  const [np,setNp]=useState({name:'',d:''}),[pin,setPin]=useState(''),[pin2,setPin2]=useState('');
+  const saveProfile=e=>{e.preventDefault();A.setProfile({...P,...f});toast(L('Profil tersimpan','Profile saved'))};
+  const addProd=e=>{
+    e.preventDefault();if(!np.name.trim())return;
+    const durs=(np.d.split(',').map(s=>s.trim()).filter(Boolean));
+    A.setCustom(A.custom.concat([{id:'c-'+uid(),name:np.name.trim(),cat:'Custom',durs:durs.length?durs:['1m']}]));setNp({name:'',d:''});
+  };
+  const changePin=async e=>{
+    e.preventDefault();
+    if(pin.length<4){toast(L('PIN minimal 4 angka','PIN needs at least 4 digits'));return}
+    if(pin!==pin2){toast(L('Konfirmasi PIN tidak sama','PINs do not match'));return}
+    if(await A.changePin(pin)){toast(L('PIN diganti','PIN changed'));setPin('');setPin2('')}else toast(L('Gagal mengganti PIN','Could not change the PIN'));
+  };
+  return $.div({className:'stack'},
+    $.h2({className:'sec-title'},L('Pengaturan','Settings'),$.small('✧ '+(CLOUD?'Supabase':L('mode demo lokal','local demo mode')))),
+    !CLOUD?$.div({className:'warnbox'},L('Mode demo: data tersimpan di browser ini saja. Isi SYION_CONFIG dengan kunci Supabase agar data tersimpan di database dan terlihat di semua perangkat.','Demo mode: data stays in this browser only. Fill SYION_CONFIG with your Supabase keys to store data in the database and see it on every device.')):null,
+    $.form({className:'glass pad stack',onSubmit:saveProfile},
+      $.h3(L('Profil toko','Shop profile')),
+      $.div({className:'form-grid'},
+        h(Field,{label:L('Nama toko','Shop name')},$.input({id:'s-name',type:'text',value:f.name,onChange:e=>setF({...f,name:e.target.value})})),
+        h(Field,{label:L('No. WhatsApp toko','Shop WhatsApp')},$.input({id:'s-wa',type:'tel',placeholder:'08xxxxxxxxxx',value:f.wa,onChange:e=>setF({...f,wa:e.target.value})})),
+        h(Field,{label:'Bio',full:true},$.input({id:'s-bio',type:'text',value:f.bio,onChange:e=>setF({...f,bio:e.target.value})})),
+        h(Field,{label:L('Pesan sapaan WhatsApp','WhatsApp greeting'),full:true},$.input({id:'s-greet',type:'text',value:f.greeting,onChange:e=>setF({...f,greeting:e.target.value})}))),
+      $.p({className:'muted'},L('Banner & foto profil diganti lewat tombol ✎ di halaman Toko.','Change the banner and profile picture with the ✎ buttons on the Shop page.')),
+      $.div({className:'row'},$.button({className:'btn btn-star',type:'submit'},'💾 '+L('Simpan','Save')))),
+    $.div({className:'glass pad stack'},
+      $.h3(L('Produk Custom','Custom products')),
+      $.form({className:'form-grid',onSubmit:addProd},
+        h(Field,{label:L('Nama produk','Product name')},$.input({id:'p-name',type:'text',value:np.name,onChange:e=>setNp({...np,name:e.target.value})})),
+        h(Field,{label:L('Durasi (pisah koma, contoh: 1m, 1y atau 7 Hari)','Durations (comma separated, e.g. 1m, 1y or 7 Days)')},$.input({id:'p-dur',type:'text',value:np.d,onChange:e=>setNp({...np,d:e.target.value})})),
+        $.div({style:{alignSelf:'end'}},$.button({className:'btn btn-pink',type:'submit'},'＋ '+L('Tambah','Add')))),
+      A.custom.length?$.div({className:'row'},A.custom.map(p=>$.span({key:p.id,className:'pill pill-cyan',style:{padding:'4px 6px 4px 12px'}},p.name+' · '+p.durs.map(d=>prodDur(d,A.lang)).join(' / ')+' ',$.button({className:'btn btn-ico','aria-label':'Remove '+p.name,style:{padding:'0 6px',background:'transparent'},onClick:()=>A.setCustom(A.custom.filter(x=>x.id!==p.id))},'✕')))):$.p({className:'muted'},L('Belum ada produk custom.','No custom products yet.'))),
+    $.form({className:'glass pad stack',onSubmit:changePin},
+      $.h3(L('Ganti PIN admin','Change admin PIN')),
+      $.div({className:'form-grid'},
+        h(Field,{label:L('PIN baru','New PIN')},$.input({id:'pin-new',type:'password',inputMode:'numeric',autoComplete:'new-password',value:pin,onChange:e=>setPin(e.target.value)})),
+        h(Field,{label:L('Ulangi PIN','Repeat PIN')},$.input({id:'pin-new2',type:'password',inputMode:'numeric',autoComplete:'new-password',value:pin2,onChange:e=>setPin2(e.target.value)}))),
+      $.div({className:'row'},$.button({className:'btn btn-pink',type:'submit'},L('Ganti PIN','Change PIN')))));
+}
+
+/* ================= app shell ================= */
+const ROUTES=['shop','orders','studio','templates','setup'];
+const getRoute=()=>{const r=location.hash.slice(1);return ROUTES.includes(r)?r:'shop'};
+
+function App(){
+  const [lang,setLangS]=useState(()=>LS.get('lang','id'));
+  const [theme,setThemeS]=useState(()=>LS.get('theme',null));
+  const [dark,setDark]=useState(()=>matchMedia('(prefers-color-scheme: dark)').matches);
+  const [route,setRoute]=useState(getRoute);
+  const [admin,setAdmin]=useState(false);
+  const [profile,setProfileS]=useState(DEFAULT_PROFILE);
+  const [custom,setCustomS]=useState([]);
+  const [testi,setTestiS]=useState([]);
+  const [orders,setOrders]=useState([]);
+  const [templates,setTemplates]=useState([]);
+  const L=(a,b)=>lang==='id'?a:b;
+  const eff=theme||(dark?'dark':'light');
+
+  useEffect(()=>{const r=document.documentElement;if(theme)r.setAttribute('data-theme',theme);else r.removeAttribute('data-theme');LS.set('theme',theme)},[theme]);
+  useEffect(()=>{const m=matchMedia('(prefers-color-scheme: dark)'),f=e=>setDark(e.matches);m.addEventListener?m.addEventListener('change',f):m.addListener(f);return()=>{m.removeEventListener?m.removeEventListener('change',f):m.removeListener(f)}},[]);
+  useEffect(()=>{document.documentElement.lang=lang;LS.set('lang',lang)},[lang]);
+  useEffect(()=>{const f=()=>{setRoute(getRoute());scrollTo(0,0)};addEventListener('hashchange',f);return()=>removeEventListener('hashchange',f)},[]);
+
+  const loadPublic=()=>DB.getKV().then(kv=>{
+    if(kv.profile)setProfileS({...DEFAULT_PROFILE,...kv.profile});
+    if(kv.custom_products)setCustomS(kv.custom_products);
+    if(kv.testimonials)setTestiS(kv.testimonials);
+  }).catch(()=>{});
+  const loadAdmin=async()=>{
+    try{setOrders(await DB.list('orders'))}catch(e){}
+    try{
+      let tp=await DB.list('templates');
+      if(!tp.length){
+        const kv=await DB.getKV();
+        if(!kv.tpl_seeded){
+          const seeded=TPL_SEED.map(s=>({id:uid(),cat:s[0],title:s[1],body:s[2],createdAt:Date.now()}));
+          for(const t of seeded)await DB.put('templates',t);
+          await DB.setKV('tpl_seeded',true);tp=seeded;
+        }
+      }
+      setTemplates(tp);
+    }catch(e){}
+  };
+  useEffect(()=>{loadPublic()},[]);
+  useEffect(()=>{if(!CLOUD)return;const t=setInterval(()=>{loadPublic();if(admin)loadAdmin()},15000);return()=>clearInterval(t)},[admin]);
+
+  const saveKV=async(k,v)=>{try{await DB.setKV(k,v);return true}catch(e){toast(L('Gagal menyimpan (penyimpanan penuh atau koneksi)','Could not save (storage full or connection)'));return false}};
+  const setProfile=p=>{setProfileS(p);saveKV('profile',p)};
+  const setCustom=c=>{setCustomS(c);saveKV('custom_products',c)};
+  const addTesti=async src=>{
+    const n=[{id:uid(),src},...testi].slice(0,12);
+    if(await saveKV('testimonials',n))setTestiS(n);else throw new Error('save');
+  };
+  const delTesti=async id=>{const n=testi.filter(t=>t.id!==id);setTestiS(n);saveKV('testimonials',n)};
+  const saveOrder=async o=>{
+    o.createdAt=o.createdAt||Date.now();
+    try{await DB.put('orders',o);setOrders(p=>p.some(x=>x.id===o.id)?p.map(x=>x.id===o.id?o:x):p.concat(o));toast(L('Pesanan tersimpan','Order saved'));return true}
+    catch(e){toast(L('Gagal menyimpan pesanan','Could not save the order'));return false}
+  };
+  const delOrder=async id=>{try{await DB.del('orders',id);setOrders(p=>p.filter(x=>x.id!==id))}catch(e){toast(L('Gagal menghapus','Could not delete'))}};
+  const saveTpl=async t=>{
+    t.createdAt=t.createdAt||Date.now();
+    try{await DB.put('templates',t);setTemplates(p=>p.some(x=>x.id===t.id)?p.map(x=>x.id===t.id?t:x):p.concat(t));toast(L('Template tersimpan','Template saved'));return true}
+    catch(e){toast(L('Gagal menyimpan template','Could not save the template'));return false}
+  };
+  const delTpl=async id=>{try{await DB.del('templates',id);setTemplates(p=>p.filter(x=>x.id!==id))}catch(e){toast(L('Gagal menghapus','Could not delete'))}};
+  const login=async pin=>{const ok=await adminLogin(pin);if(ok){setAdmin(true);loadAdmin()}return ok};
+  const logout=()=>{authToken=null;setAdmin(false);setOrders([]);setTemplates([]);location.hash='shop'};
+
+  const A={lang,L,setLang:setLangS,theme,eff,setTheme:setThemeS,route,go:r=>{location.hash=r},admin,login,logout,changePin,
+    profile,setProfile,custom,setCustom,products:BASE_PRODUCTS.concat(custom),testi,addTesti,delTesti,orders,saveOrder,delOrder,templates,saveTpl,delTpl};
+
+  let view;
+  if(route==='shop')view=h(Storefront);
+  else if(!admin)view=h(PinGate);
+  else view=route==='orders'?h(Orders):route==='studio'?h(Studio):route==='templates'?h(Templates):h(Settings);
+
+  return h(AppCtx.Provider,{value:A},
+    h(Stars),h(Sparkles),
+    h(Nav),
+    admin?h(AdminTabs):null,
+    $.main(view),
+    h(ToastHost));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+</script>
